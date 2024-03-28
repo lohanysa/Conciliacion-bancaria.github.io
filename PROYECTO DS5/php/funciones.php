@@ -1,6 +1,7 @@
 
 <?php 
-
+//verificar si funciona el archivo :)
+// http://localhost/Conciliacion-bancaria/PROYECTO%20DS5/php/funciones.php
 //funcion para la conexion a la bd
 function conexionServer(){
     define('HOST', "localhost");
@@ -14,5 +15,6 @@ function conexionServer(){
     $est->set_charset('utf8');
     $est->close();
 }
-// http://localhost/Conciliacion-bancaria/PROYECTO%20DS5/php/funciones.php
+
+
 ?>

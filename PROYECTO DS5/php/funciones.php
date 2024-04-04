@@ -1,20 +1,38 @@
 
 <?php 
+
 //verificar si funciona el archivo :)
 // http://localhost/Conciliacion-bancaria/PROYECTO%20DS5/php/funciones.php
 //funcion para la conexion a la bd
-function conexionServer(){
-    define('HOST', "localhost");
-    define('USER', "d52024");
-    define('PASS',"12345");
-    define('DB', "nombre de base de datos");
-    $est = mysqli_connect(HOST,USER,PASS, DB);
-    if($est->connect_errno){
-        die(("fallo la conexion a mySQL: ".$est->connect_errno." ".mysqli_connect_errno()));
+
+function bucarMes(){
+    include "../conexion/conexion.php";
+    $buscar_mes = mysqli_query($est, "SELECT * FROM ch_meses ORDER BY mes");
+    while ($mes_e=mysqli_fetch_assoc($buscar_mes)){
+    $seleccionado="";
+    if($mes_e['mes']==$mes_actual){$seleccionado ="selected";}
+    print "<option value='".$mes_e['mes']."' ".$seleccionado.">".$mes_e['nombre_mes'];
     }
-    $est->set_charset('utf8');
-    $est->close();
 }
 
+function buscarObjeto_Gasto(){
+    include "../conexion/conexion.php";
+    $objeto_busqueda = mysqli_query($est, "SELECT * FROM objeto ORDER BY objeto");
+    while ($objeto=mysqli_fetch_assoc($objeto_busqueda)){
+    
+    }
+    
+}
+
+function proveedores(){
+    include "../conexion/conexion.php";
+    $tabla_proveedor="SELECT * FROM proveedores"; 
+        $resultado= $est->query($tabla_proveedor);
+            while ($fila = mysqli_fetch_array($resultado)) {
+            $id =$fila['codigo'];
+            $nombre = $fila['nombre'];
+        print '<option value = "'.$id.'">' . $nombre . '</option>';
+            }
+}
 
 ?>

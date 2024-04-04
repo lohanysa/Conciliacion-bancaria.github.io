@@ -61,7 +61,7 @@ section {
     max-width: 700px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #c6c6dd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -71,11 +71,6 @@ section {
 
   .section {
     width: 50%; /* Ancho del 48% para dejar espacio entre los elementos */
-  }
-
-  h2, h3 {
-    text-align: left;
-    margin-bottom: 20px;
   }
 
   label {
@@ -110,7 +105,7 @@ section {
     max-width: 1000px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #c6c6dd;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -127,11 +122,6 @@ section {
     margin-bottom: 20px;
   }
   
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
-  
   textarea {
     width: 100%;
     padding: 8px;
@@ -143,16 +133,20 @@ section {
     height: 100px;
   }
   
-  button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  .containertres {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #c6c6dd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
+
+  .section3 {
+    width: 48%;
+  }
+
   
-  button:hover {
-    background-color: #45a049;
-  }

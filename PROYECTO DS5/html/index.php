@@ -47,7 +47,7 @@
             </selct>
             <br><br>
             <label for="cantidad">La suma de:</label>
-            <input type="text" id="cantidad" name="cantidad" required onkeypress="return solodecimal(event)" autocomplete="off" placeholder="Campo obligatorio">
+            <input type="text" id="cantidad" name="cantidad" required onkeypress="return solodecimal(event),  Numeros_letras(id)" autocomplete="off" placeholder="Campo obligatorio">
     
             <label for="detalle">Detalle:</label>
             <input type="text" id="detalle" name="detalle" required autocomplete="off" placeholder="Campo obligatorio">

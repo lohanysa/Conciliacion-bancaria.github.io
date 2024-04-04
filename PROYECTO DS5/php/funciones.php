@@ -35,4 +35,15 @@ function proveedores(){
             }
 }
 
+function objetoGasto(){
+    include "../conexion/conexion.php";
+    $tabla_gasto="SELECT * FROM objeto_gasto";
+    $resultado = $est->query($tabla_gasto);
+    while($fila = mysqli_fetch_array($resultado)){
+        $id = $fila['codigo'];
+        $nombre = $fila['detalle'];
+        echo '<option value = "'.$id.'">' . $nombre . '</option>';
+    }
+}
+
 ?>

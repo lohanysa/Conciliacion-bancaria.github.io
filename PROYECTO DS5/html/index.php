@@ -41,8 +41,11 @@
             <input type="date" id="fecha" name="fecha" required>
     
             <label for="beneficiario"> Paguese a la orden de:</label>
-            <input type="text" id="beneficiario" name="beneficiario" required autocomplete="off" placeholder="Campo obligatorio">
-    
+            <select id="beneficiario" name="beneficiario" >
+              <?php include "../php/funciones.php";
+                proveedores(); ?>
+            </selct>
+            <br><br>
             <label for="cantidad">La suma de:</label>
             <input type="text" id="cantidad" name="cantidad" required onkeypress="return solodecimal(event)" autocomplete="off" placeholder="Campo obligatorio">
     
@@ -57,20 +60,11 @@
           <h3>Objetos de Gastos</h3>
           <form>
             <label for="objeto">Objeto:</label>
-            <input type="text" id="objeto" name="objeto" required autocomplete="off">
-    
-            <label for="monto">Monto:</label>
-            <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off">
-
-            <label for="objeto">Objeto:</label>
-            <input type="text" id="objeto" name="objeto" required autocomplete="off">
-    
-            <label for="monto">Monto:</label>
-            <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off">
-
-            <label for="objeto">Objeto:</label>
-            <input type="text" id="objeto" name="objeto" required autocomplete="off">
-    
+            <select  id="objeto" name="objeto">
+              <?php 
+              objetoGasto(); ?>
+            </select>
+            
             <label for="monto">Monto:</label>
             <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off">
     <br><br>

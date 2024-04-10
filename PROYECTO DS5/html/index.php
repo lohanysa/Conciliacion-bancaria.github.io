@@ -34,12 +34,12 @@
       <div class="containeruno">
         <div class="section">
           <h2>Creación de cheque</h2>
-          <form method="$_POST" action="../php/funciones.php" >
+          <form method="$_POST" action='../php/grabarCheque.php' >
             <label for="numero">No. de Cheque:</label>
-            <input type="text" id="numero" name="numero" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio">
+            <input type="text" id="numero" name="numero" value="0" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio">
     
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
+            <input type="date" id="fecha" name="fecha"  required>
     
             <label for="beneficiario"> Paguese a la orden de:</label>
             <select id="beneficiario" name="beneficiario" >
@@ -48,18 +48,18 @@
             </select>
             <br><br>
             <label for="cantidad">La suma de:</label>
-            <input type="text" id="cantidad" name="cantidad" required onkeydown="return numeropunto(event)" autocomplete="off" placeholder="Campo obligatorio">
+            <input type="text" id="cantidad" name="cantidad" value="0" required onkeydown="return numeropunto(event)" autocomplete="off" placeholder="Campo obligatorio">
     
             <label for="detalle">Detalle:</label>
-            <input type="text" id="detalle" name="detalle" required autocomplete="off" placeholder="Campo obligatorio">
+            <input type="text" id="detalle" name="detalle" value="detalle" required autocomplete="off" placeholder="Campo obligatorio">
     <br><br>
-            <button type="submit">Grabar</button>
+            <button type="submit" onclick="grabarCheque()">Grabar</button>
             <button type="submit">Imprimir</button>
           </form>
         </div>
         <div class="section">
           <h3>Objetos de Gastos</h3>
-          <form method="$_POST" action="../php/funciones.php">
+          <form method="$_POST" action="../php/grabarCheque.php">
             <label for="objeto">Objeto:</label>
             <select  id="objeto" name="objeto">
               <?php 

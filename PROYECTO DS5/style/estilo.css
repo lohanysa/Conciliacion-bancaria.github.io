@@ -1,152 +1,118 @@
 body{
-    background-color: rgb(255, 255, 255);  
+  background-image: url('https://wallpaperservices.azurewebsites.net/Power-Your-Dreams-Starfield/wide.png?download');
+      background-size: cover; /* Para cubrir todo el fondo */
+      /* Otras propiedades CSS opcionales como background-repeat, background-position, etc. */  
 }
 
 nav{
-    max-width: 1200px;
-    margin: auto;
-    background-color: #0d1036;
-    font-size: 20px;
-    margin-top: 50px;
+  max-width: 1200px;
+  margin: auto;
+  background-color: #ffffff;
+  font-size: 20px;
+  margin-top: 50px;
+  z-index: 2; /* Asegúrate de que la barra de navegación esté por encima del contenedor */
+  position: relative; /* Establece un contexto de posicionamiento */
 }
 
 .menu-horizontal{
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
 }
 
 .menu-horizontal > li > a{
-    display: block;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
+  display: block;
+  padding: 15px 20px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
 }
 
 .menu-horizontal > li:hover{
-    background-color: red;
+  background-color: rgb(0, 0, 0);
 }
 
 .menu-vertical{
-    position: absolute;
-    display: none;
-    list-style: none;
-    width: 300px;
-    background-color: rgba(27, 25, 25, 0.5);
+  position: absolute;
+  display: none;
+  list-style: none;
+  width: 300px;
+  background-color: #ffffff;
 }
 
 .menu-horizontal li:hover .menu-vertical{
-    display: block;
+  display: block;
 }
 
 .menu-horizontal li:hover{
-    background-color: black;
+  background-color: rgb(195, 197, 211);
 }
 
 .menu-vertical li a{
-    display: block;
-    color: white;
-    padding: 15px 15px 15px 20px;
-    text-decoration: none;
+  display: block;
+  padding: 15px 15px 15px 20px;
+  text-decoration: none;
 }
 
-section {
-    display: none;
-    padding: 20px;
-    margin-top: 20px;
-    background-color: #91313100;
-  }
+input[type="text"], input[type="date"], input[type="number"] {
+  width: 70%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
-  .containeruno {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #c6c6dd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
+label {
+  display: block;
+  margin-bottom: 8px;
+}
 
-  .section {
-    width: 50%; /* Ancho del 48% para dejar espacio entre los elementos */
-  }
+.container {
+  position: absolute; /* Posicionamiento absoluto para centrar verticalmente */
+  top: 50%; /* Ubica el contenedor en el 50% del borde superior */
+  left: 50%; /* Ubica el contenedor en el 50% del borde izquierdo */
+  transform: translate(-50%, -50%); /* Centra verticalmente y horizontalmente */
+  width: 60%; /* Ancho del contenedor */
+  max-width: 1200px; /* Máximo ancho del contenedor */
+  margin-top: 80px; /* Espacio entre la barra de navegación y el contenedor */
+}
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
+.containerTransac {
+  position: absolute; /* Posicionamiento absoluto para centrar verticalmente */
+  top: 50%; /* Ubica el contenedor en el 50% del borde superior */
+  left: 50%; /* Ubica el contenedor en el 50% del borde izquierdo */
+  transform: translate(-50%, -50%); /* Centra verticalmente y horizontalmente */
+  width: 60%; /* Ancho del contenedor */
+  max-width: 1000px; /* Máximo ancho del contenedor */
+  margin-top: 0px; /* Espacio entre la barra de navegación y el contenedor */
+}
 
-  input[type="text"], input[type="date"], input[type="number"] {
-    width: 70%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: none;
+  height: 100px;
+}
 
-  button {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-  button:hover {
-    background-color: #45a049;
-  }
+button:hover {
+  background-color: #45a049;
+}
 
-  .containerdos {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #c6c6dd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .section2 {
-    width: 48%;
-  }
-  
-  h2, h3 {
-    text-align: left;
-    margin-bottom: 20px;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    resize: none;
-    height: 100px;
-  }
-  
-  .containertres {
-    max-width: 1000px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #c6c6dd;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .section3 {
-    width: 48%;
-  }
-
-  
+.input-container input {
+  display: block; /* Cambiado a display: block para asegurar que estén uno debajo del otro */
+  margin-bottom: 1px;
+}

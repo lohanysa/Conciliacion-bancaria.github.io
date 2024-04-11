@@ -1,8 +1,8 @@
-var buscar = document.getElementById('noCheque');
+var buscar = document.getElementById('buscar');
 var formulario = document.getElementById('anulacion');
+var numero_Cheque = document.getElementById('noCheque');
 
-buscar.addEventListener('change', function(e){
-    var numero_Cheque = document.getElementById('noCheque');
+buscar.addEventListener('click', function(e){
     e.preventDefault();
     var datos=new FormData(formulario)
     fetch("../php/anulacion .php", {

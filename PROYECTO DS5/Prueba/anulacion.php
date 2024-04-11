@@ -28,7 +28,7 @@
       
             <label for="descripcion">Descripción de Gasto:</label>
             <input type="text" id="descripcion" name="descripcion" autocomplete="off">
-            <button type="submit">Buscar</button>
+            <button id="buscar" name="buscar" type="submit">Buscar</button>
           </form>
           <script src="../javascript/anulacion.js"></script>
     </body>

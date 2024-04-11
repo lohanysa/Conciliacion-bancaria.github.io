@@ -1,6 +1,8 @@
 <?php
 require_once "../conexion/conexion.php";
-
+# method="post": Este atributo especifica el método HTTP que se utilizará al enviar el formulario. 
+#En este caso, está configurado como “post”, lo que significa que los 
+#datos del formulario se enviarán al servidor como parte del cuerpo de la solicitud HTTP.
 echo 'estoy en grabarCheque';
  //$_SERVER["REQUEST_METHOD"]. Luego, se comprueba si el campo 'nombre' está presente en $_POST. 
  //Si lo está, se asigna su valor a la variable $nombre, que luego se puede usar según sea necesario. 

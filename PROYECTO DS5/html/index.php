@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/estilo.css">
     <script src="../javascript/script.js"> </script>
-    <!--<script src="../javascript/anulacion.js"></script>-->
 </head>
 <body>
  <?php include "../php/funciones.php";?>
@@ -41,7 +40,8 @@
                                 <h5 class="card-title">Cheque</h5>
                             
                                 <label for="numero">No. de Cheque:</label>
-                                <input type="text" id="numero" name="numero" required autocomplete="off" placeholder="Campo obligatorio">
+                                <input type="text" id="numero" name="numero" required autocomplete="off"  onkeypress= "return solonumeros(event)" maxlength="5" placeholder="Campo obligatorio">
+
                             
                                 <label for="fecha">Fecha:</label>
                                 <input type="date" id="fecha" name="fecha" required>
@@ -55,12 +55,12 @@
                             
                                 <label for="cantidad">La suma de:</label>
                                 <div style="display: flex;">
-                                    <input type="text" style="width: 30%; margin-right: 10px;" id="cantidad" name="cantidad" required autocomplete="off" placeholder="Campo obligatorio">
-                                    <input type="text" style="width: 70%;" id="otroInput" name="otroInput" required autocomplete="off">
+                                    <input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="cantidad2" name="cantidad2" required autocomplete="off" onkeypress="return numerosPunto(event)"  oninput="actualizarMonto(this.value)" maxlength="10">
+                                    <input type="text" style="width: 70%;" id="otroInput" name="otroInput" autocomplete="off" readonly>
                                 </div>
                             
                                 <label for="detalle">Detalle:</label>
-                                <input type="text" id="detalle" name="detalle" required autocomplete="off" placeholder="Campo obligatorio">
+                                <textarea id="detalleCreacion" name="detalleCreacion" autocomplete="off"></textarea>
                             
                                 <br><br>
                                 <button type="submit">Grabar</button>
@@ -79,7 +79,7 @@
                                       ?>
                                     </select>
                                     <label for="monto">Monto:</label>
-                                    <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio" >
+                                    <input type="text" id="monto" name="monto" autocomplete="off" readonly>
                         
                                     <br><br>
                                     <button type="submit">Nuevo</button>
@@ -94,46 +94,46 @@
 
     <section id="seccionAnulacion" style="display: none;">
         <div class="container-fluid">
-            <form id="seccionAnulacion" name="seccionAnulacion">
-            <script src="../javascript/anulacion.js"></script>
+            <form id="anulacion" name="anulacion">
+            
                 <div class="card">
                     <h5 class="card-header">Anulación</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                
-                                    <label for="noCheque">No. Cheque:</label>
-                                    <input type="text" id="noCheque" name="noCheque" autocomplete="off">
+                                <label for="noCheque">No. Cheque:</label>
+                                <input type="text" id="noCheque" name="noCheque" autocomplete="off">
                           
                                     <button id="buscar" name="buscar" type="submit">Buscar</button>
                                     
                                     <label for="fecha">Fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" readonly>
+                                    <input type="date" id="fecha" name="fecha" >
                             
                                     <label for="beneficiario"> Paguese a la orden de:</label>
-                                    <input type="text" id="beneficiario" name="beneficiario" readonly autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="beneficiario" name="beneficiario" autocomplete="off" >
                             
                                     <label for="cantidad">La suma de:</label>
-                                    <input type="text" id="cantidad" name="cantidad" readonly onkeypress="return solodecimal(event)" autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="cantidad" name="cantidad" autocomplete="off">
                             
                                     <label for="detalle">Descripción de gasto:</label>
-                                    <input type="text" id="detalle" name="detalle" readonly autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="detalle" name="detalle"  autocomplete="off">
     
                             </div>
                             
                             <div class="col-md-6">
     
-                                    <label for="fechaAnulacion">Fecha de Anulación:</label>
-                                    <input type="date" id="fechaAnulacion" name="fechaAnulacion" autocomplete="off">
-                              
-                                    <label for="detalleAnulacion">Detalle de Anulación:</label>
-                                    <textarea id="detalleAnulacion" name="detalleAnulacion" autocomplete="off"></textarea>
-                              
-                                    <button type="submit">Anular</button>
+                            <label for="fechaAnulacion">Fecha de Anulación:</label>
+                            <input type="date" id="fechaAnulacion" name="fechaAnulacion" autocomplete="off">
+      
+                            <label for="detalleAnulacion">Detalle de Anulación:</label>
+                            <textarea id="detalleAnulacion" name="detalleAnulacion" autocomplete="off"></textarea>
+                            <button type="submit">Anular</button>
+                            
                             </div>
                         </div>
                     </div>
                   </div>
+                  <script src="../javascript/anulacion.js"></script>
             </form>
         </div>
     </section>
@@ -153,16 +153,16 @@
                                     <button type="button">Buscar</button>
                               
                                     <label for="fecha">Fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" autocomplete="off" readonly>
+                                    <input type="date" id="fecha" name="fecha" autocomplete="off" >
                               
                                     <label for="paguese"> Paguese a la Orden de:</label autocomplete="off">
-                                    <input type="text" id="paguese" name="paguese" readonly>
+                                    <input type="text" id="paguese" name="paguese" >
                               
                                     <label for="suma">La suma de:</label>
-                                    <input type="text" id="suma" name="suma" autocomplete="off" readonly>
+                                    <input type="text" id="suma" name="suma" autocomplete="off" >
                               
                                     <label for="descripcion">Descripción de Gasto:</label>
-                                    <input type="text" id="descripcion" name="descripcion" autocomplete="off" readonly>
+                                    <input type="text" id="descripcion" name="descripcion" autocomplete="off" >
                                   </form>
                             </div>
                             
@@ -194,10 +194,10 @@
                                   <input type="text">
                     
                                   <label for="fecha">Fecha:</label>
-                                  <input type="date" id="fecha" name="fecha" required>
+                                  <input type="date" id="fecha" name="fecha" >
                     
                                   <label for="monto">Monto:</label>
-                                  <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio" >
+                                  <input type="text" id="monto" name="monto" autocomplete="off" >
                     
                                   <br><br>
                                   <button type="submit">Grabar</button>

@@ -1,11 +1,11 @@
 var buscar = document.getElementById('buscar');
-var formulario = document.getElementById('seccionAnulacion');
+var formulario = document.getElementById('anulacion');
 var numero_Cheque = document.getElementById('noCheque');
 
 buscar.addEventListener('click', function(e){
     e.preventDefault();
     var datos=new FormData(formulario)
-    fetch("../php/anulacion .php", {
+    fetch("../php/anulacion.php", {
         method: 'POST',
         body: datos,
     })
@@ -16,8 +16,8 @@ buscar.addEventListener('click', function(e){
             alert("no existe");
         }else{
             document.getElementById('fecha').value= datos.fecha
-            document.getElementById('paguese').value= datos.paguese
-            document.getElementById('suma').value= datos.suma
+            document.getElementById('beneficiario').value= datos.paguese
+            document.getElementById('cantidad').value= datos.suma
             document.getElementById('descripcion').value= datos.descripcion
            }
     })

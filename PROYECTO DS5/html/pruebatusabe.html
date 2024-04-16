@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertir números a palabras</title>
+</head>
+<body>
+
+<input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="cantidad2" name="cantidad2" required autocomplete="off" onkeypress="return numerosPunto(event)"  oninput="actualizarMonto(this.value)" maxlength="10">
+<input type="text" style="width: 70%;" id="otroInput" name="otroInput" autocomplete="off" readonly>
+
+<script>
+// Función para convertir números a palabras
+function convertirNumeroAPalabras(numero) {
+    // Array para las unidades
+    const unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+
+    // Array para las decenas especiales
+    const especiales = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+
+    // Array para las decenas
+    const decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+
+    // Array para los miles
+    const miles = ['', 'mil', 'millón', 'mil millones', 'billón', 'mil billones'];
+
+    if (numero === 0) return 'cero';
+
+    // Función recursiva para convertir grupos de tres dígitos a palabras
+    function convertirGrupo(num) {
+        let palabras = '';
+
+        // Centenas
+        if (num >= 100) {
+            palabras += unidades[Math.floor(num / 100)] + ' cientos ';
+            num %= 100;
+        }
+
+        // Decenas especiales
+        if (num >= 10 && num <= 19) {
+            palabras += especiales[num - 10];
+            return palabras;
+        }
+
+        // Decenas
+        if (num >= 20) {
+            palabras += decenas[Math.floor(num / 10)];
+            num %= 10;
+            if (num > 0) palabras += ' y ';
+        }
+
+        // Unidades
+        if (num > 0) palabras += unidades[num];
+
+        return palabras;
+    }
+
+    let resultado = '';
+    let contador = 0;
+
+    // Dividir el número en grupos de tres dígitos
+    while (numero > 0) {
+        const grupo = numero % 1000;
+        if (grupo > 0) {
+            resultado = convertirGrupo(grupo) + ' ' + miles[contador] + ' ' + resultado;
+        }
+        numero = Math.floor(numero / 1000);
+        contador++;
+    }
+
+    return resultado.trim();
+}
+
+// Función para validar solo números y el punto decimal en el primer input
+function numerosPunto(event) {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode === 46) {
+        const input = event.target.value;
+        if (input.indexOf('.') !== -1) {
+            event.preventDefault();
+        }
+        return true;
+    } else if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        event.preventDefault();
+    }
+    return true;
+}
+
+// Función para actualizar el segundo input con el valor en palabras
+function actualizarMonto(valor) {
+    const numero = parseFloat(valor);
+    if (!isNaN(numero)) {
+        const palabras = convertirNumeroAPalabras(numero);
+        document.getElementById('otroInput').value = palabras;
+    } else {
+        document.getElementById('otroInput').value = '';
+    }
+}
+</script>
+
+</body>
+</html>

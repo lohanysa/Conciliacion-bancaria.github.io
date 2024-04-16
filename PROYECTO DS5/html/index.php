@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>proyecto ds5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/style.css">
-    <script src="../JAVASCRIPT/funciones.js"> </script>
+    <link rel="stylesheet" href="../style/estilo.css">
+    <script src="../javascript/script.js"> </script>
 </head>
 <body>
-
+ <?php include "../php/funciones.php";?>
     <nav>
         <ul class="menu-horizontal">
             <li><a onclick="mostrarSeccion()">Inicio</a></li>
@@ -46,7 +46,11 @@
                                 <input type="date" id="fecha" name="fecha" required>
                             
                                 <label for="beneficiario">Paguese a la orden de:</label>
-                                <input type="text" id="beneficiario" name="beneficiario" required autocomplete="off" placeholder="Campo obligatorio">
+                                <select type="text" id="beneficiario" name="beneficiario" >
+                                  <?php
+                                    proveedores();
+                                  ?>
+                                </select> 
                             
                                 <label for="cantidad">La suma de:</label>
                                 <div style="display: flex;">
@@ -68,8 +72,11 @@
                                 <h5 class="card-title">Objeto de gasto</h5>
     
                                     <label for="objeto">Objeto:</label>
-                                    <input type="text" id="objeto" name="objeto" required autocomplete="off" placeholder="Campo obligatorio">
-                            
+                                    <select  id="objeto" name="objeto">
+                                      <?php 
+                                      objetoGasto();
+                                      ?>
+                                    </select>
                                     <label for="monto">Monto:</label>
                                     <input type="text" id="monto" name="monto" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio" >
                         

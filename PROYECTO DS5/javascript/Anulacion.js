@@ -1,5 +1,5 @@
 var buscar = document.getElementById('buscar');
-var formulario = document.getElementById('anulacion');
+var formulario = document.getElementById('seccionAnulacion');
 var numero_Cheque = document.getElementById('noCheque');
 
 buscar.addEventListener('click', function(e){

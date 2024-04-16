@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/estilo.css">
     <script src="../javascript/script.js"> </script>
+    <!--<script src="../javascript/anulacion.js"></script>-->
 </head>
 <body>
  <?php include "../php/funciones.php";?>
@@ -93,7 +94,8 @@
 
     <section id="seccionAnulacion" style="display: none;">
         <div class="container-fluid">
-            <form>
+            <form id="seccionAnulacion" name="seccionAnulacion">
+            <script src="../javascript/anulacion.js"></script>
                 <div class="card">
                     <h5 class="card-header">Anulación</h5>
                     <div class="card-body">
@@ -103,19 +105,19 @@
                                     <label for="noCheque">No. Cheque:</label>
                                     <input type="text" id="noCheque" name="noCheque" autocomplete="off">
                           
-                                    <button type="button">Buscar</button>
-                            
+                                    <button id="buscar" name="buscar" type="submit">Buscar</button>
+                                    
                                     <label for="fecha">Fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" required>
+                                    <input type="date" id="fecha" name="fecha" readonly>
                             
                                     <label for="beneficiario"> Paguese a la orden de:</label>
-                                    <input type="text" id="beneficiario" name="beneficiario" required autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="beneficiario" name="beneficiario" readonly autocomplete="off" placeholder="Campo obligatorio">
                             
                                     <label for="cantidad">La suma de:</label>
-                                    <input type="text" id="cantidad" name="cantidad" required onkeypress="return solodecimal(event)" autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="cantidad" name="cantidad" readonly onkeypress="return solodecimal(event)" autocomplete="off" placeholder="Campo obligatorio">
                             
                                     <label for="detalle">Descripción de gasto:</label>
-                                    <input type="text" id="detalle" name="detalle" required autocomplete="off" placeholder="Campo obligatorio">
+                                    <input type="text" id="detalle" name="detalle" readonly autocomplete="off" placeholder="Campo obligatorio">
     
                             </div>
                             

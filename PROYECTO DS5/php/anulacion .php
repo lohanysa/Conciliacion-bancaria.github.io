@@ -1,6 +1,6 @@
 <?php 
 require_once "../conexion/conexion.php";
- $num_cheque =(string) $_POST['noCheque'];
+ $num_cheque =$_POST['noCheque'];
  $consul_beneficiario = mysqli_query($est,'SELECT codigo, nombre FROM proveedores ');
  $consulta = mysqli_prepare($est, 'SELECT cheques.numero_cheque, cheques.fecha, cheques.beneficiario, cheques.monto, cheques.descripcion, proveedores.codigo, proveedores.nombre 
                             FROM cheques, proveedores 

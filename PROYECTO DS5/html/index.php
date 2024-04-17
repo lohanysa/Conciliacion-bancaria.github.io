@@ -31,7 +31,8 @@
 
     <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
-            <form id="crear" name="crear">
+            <!--method="post" action="../php/grabarCheque.php"-->
+            <form id="crear" name="crear" method="post" action="../php/grabarCheque.php">
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
@@ -63,7 +64,7 @@
                                 <textarea id="detalleCreacion" name="detalleCreacion" autocomplete="off"></textarea>
                             
                                 <br><br>
-                                <button type="submit">Grabar</button>
+                                <button id="grabar" name="grabar" type="submit">Grabar</button>
                                 <button type="submit">Imprimir</button>
                             </div>
                             
@@ -82,12 +83,13 @@
                                     <input type="text" id="monto" name="monto" autocomplete="off" readonly>
                         
                                     <br><br>
-                                    <button type="submit">Nuevo</button>
+                                    <button type="reset">Nuevo</button>
     
                             </div>
                         </div>
                     </div>
                   </div>
+                  <script src="../javascript/creacion.js"></script>
             </form>
         </div>
     </section>
@@ -196,8 +198,8 @@
                                   <label for="fecha">Fecha:</label>
                                   <input type="date" id="fecha" name="fecha" >
                     
-                                  <label for="monto">Monto:</label>
-                                  <input type="text" id="monto" name="monto" autocomplete="off" >
+                                  <label for="monto1">Monto:</label>
+                                  <input type="text" id="monto1" name="monto1" autocomplete="off" >
                     
                                   <br><br>
                                   <button type="submit">Grabar</button>

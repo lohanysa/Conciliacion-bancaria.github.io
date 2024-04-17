@@ -7,7 +7,8 @@ require_once "../conexion/conexion.php";
  
  //Si lo está, se asigna su valor a la variable $nombre, que luego se puede usar según sea necesario. 
  //Si el campo 'nombre' no está presente, se muestra un mensaje indicando que no se ha enviado el campo.
- $numero_cheque = $_POST["numero"];
+ //if (isset($_POST["numero"])) {
+$numero_cheque = $_POST['numero'];
  $verificarNum = mysqli_prepare($est, 'SELECT numero_cheque FROM cheques WHERE numero_cheque= ?');
  mysqli_stmt_bind_param($verificarNum, 's', $numero_cheque);
  mysqli_stmt_execute($verificarNum);
@@ -19,24 +20,27 @@ $fila= mysqli_num_rows($resultado) ;
         
         }else{
             try {
-                $numero_cheque = $_POST["numero"];
-                $fecha = $_POST["fecha"];
-                $beneficiario = $_POST["beneficiario"]; 
-                $monto = $_POST["monto"]; 
-                $descripcion = $_POST["detalle"];
-                $codigo_objeto1 = NULL;  
-                $monto_objeto1 = 0.0;
+                $fecha = $_POST['fecha'];
+                $beneficiario = $_POST['beneficiario']; 
+                $monto = $_POST['cantidad2']; 
+                $descripcion = $_POST['detalleCreacion'];
+                $codigo_objeto1 = $_POST['objeto'];
+                $monto_objeto1 = $_POST['monto'];
                 
                 $Con_insert = mysqli_query($est, "INSERT INTO cheques (numero_cheque, fecha, beneficiario, monto, descripcion, codigo_objeto1, monto_objeto1) VALUES ('$numero_cheque', '$fecha', '$beneficiario', '$monto', '$descripcion', '$codigo_objeto1', '$monto_objeto1')");
             
                 if ($Con_insert) {
-                    echo json_encode(array('message' => 'Se ha guardado correctamente el cheque número: ' . $numero_cheque));
+                    echo json_encode('message: Se ha guardado correctamente el cheque número: ' . $numero_cheque);
                 } else {
                     throw new Exception(mysqli_error($est));
                 }
             } catch (Exception $e) {
-                echo json_encode(array('error' => $e->getMessage()));
+                echo json_encode('error: ' . $e->getMessage());
             }
             
         }
+ //}
 ?>
+
+
+ 

@@ -1,5 +1,4 @@
-    
-    
+
     var grabar = document.getElementById('grabar');
     var crear = document.getElementById('crear');
     grabar.addEventListener('submit', function(e){

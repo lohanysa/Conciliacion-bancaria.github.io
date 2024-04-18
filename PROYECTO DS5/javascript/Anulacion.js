@@ -16,7 +16,7 @@ buscar.addEventListener('click', function(e){
             alert("no existe");
         }else{
             document.getElementById('fecha').value= datos.fecha
-            document.getElementById('beneficiario').value= datos.paguese
+            document.getElementById('beneficiario').value= datos.beneficiario
             document.getElementById('cantidad').value= datos.suma
             document.getElementById('descripcion').value= datos.descripcion
            }

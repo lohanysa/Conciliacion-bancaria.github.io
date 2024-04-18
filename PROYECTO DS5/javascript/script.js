@@ -34,12 +34,4 @@ function numerosPunto(evento) {
   } else {
       return false;
   }
-}
-
-function actualizarMonto(valor) {
-  var inputMonto = document.getElementById("monto");
-  inputMonto.value = valor;
-}
-
-
-    
+}  

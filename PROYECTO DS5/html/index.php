@@ -10,6 +10,8 @@
 </head>
 <body>
  <?php include "../php/funciones.php";?>
+
+<!-------------------------BARRA DE NAVEGACION---------------------------------------------------------------------------------------------->
     <nav>
         <ul class="menu-horizontal">
             <li><a onclick="mostrarSeccion()">Inicio</a></li>
@@ -28,117 +30,135 @@
             <li><a onclick="mostrarSeccion()">Mantenimiento</a></li>
         </ul>
     </nav>
-
-    <section id="seccionCheque" style="display: none;">
+<!-----------------------PRIMERA #1 SECCION CREACION DE CHEQUES-------------------------------------------------------------->
+    
+<section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
-            <!--method="post" action="../php/grabarCheque.php"-->
-            <form id="crear" name="crear" >
+            <form id="crearCheque" name="crearCheque">
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
                         <div class="row">
+                            
+<!-----------------------------PRIMERA COLUMNA DE CREACION DE CHEQUES--------------------------------------------------->
+                            
                             <div class="col-md-6">
                                 <h5 class="card-title">Cheque</h5>
                             
-                                <label for="numero">No. de Cheque:</label>
-                                <input type="text" id="numero" name="numero" required autocomplete="off"  onkeypress= "return solonumeros(event)" maxlength="5" placeholder="Campo obligatorio">
+                                <label>No. de Cheque:</label>
+                                <input type="text" id="numeroDeCheque" name="numeroDeCheque" autocomplete="off"  onkeypress= "return solonumeros(event)" maxlength="5" placeholder="Campo obligatorio" required >
 
+                                <label>Fecha:</label>
+                                <input type="date" id="fechaDeCheque" name="fechaDeCheque" required>
                             
-                                <label for="fecha">Fecha:</label>
-                                <input type="date" id="fecha" name="fecha" required>
-                            
-                                <label for="beneficiario">Paguese a la orden de:</label>
-                                <select type="text" id="beneficiario" name="beneficiario" >
+                                <label>Paguese a la orden de:</label>
+                                <select type="text" id="beneficiarioDeCheque" name="beneficiarioDeCheque" required >
                                   <?php
                                     proveedores();
                                   ?>
                                 </select> 
-                            
-                                <label for="cantidad">La suma de:</label>
+
+                                <label>La suma de:</label>
                                 <div style="display: flex;">
-                                    <input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="cantidad2" name="cantidad2" required autocomplete="off" onkeypress="return numerosPunto(event)"  oninput="actualizarMonto(this.value)" maxlength="10">
-                                    <input type="text" style="width: 70%;" id="otroInput" name="otroInput" autocomplete="off" readonly>
+                                    <input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="sumaDeCheque" name="sumaDeCheque" autocomplete="off" onkeypress="return numerosPunto(event)" maxlength="10" required >
+                                    <input type="text" style="width: 70%;" id="sumaEnLetras" name="sumaEnLetras" readonly>
                                 </div>
                             
                                 <label for="detalle">Detalle:</label>
-                                <textarea id="detalleCreacion" name="detalleCreacion" autocomplete="off"></textarea>
-                            
+                                <textarea id="detalleDeCheque" name="detalleDeCheque" autocomplete="off"></textarea>
                                 <br><br>
-                                <button id="grabar" name="grabar" type="submit">Grabar</button>
+<!-------------------------------BOTONOES DE LA PRIMERA COLUMNA DE CREACION DE CHEQUE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                                
+                                <button id="grabarDeCheque" name="grabarDeCheque" type="submit">Grabar</button>
                                 <button type="submit">Imprimir</button>
                             </div>
                             
-                            
-                            
+<!------------------------------SEGUNDA COLUMNA DE CREACION DE CHEQUES------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+                      
                             <div class="col-md-6">
                                 <h5 class="card-title">Objeto de gasto</h5>
     
-                                    <label for="objeto">Objeto:</label>
-                                    <select  id="objeto" name="objeto">
+                                    <label>Objeto:</label>
+                                    <select  id="objetoDeCheque" name="objetoDeCheque">
                                       <?php 
                                       objetoGasto();
                                       ?>
                                     </select>
-                                    <label for="monto">Monto:</label>
-                                    <input type="text" id="monto" name="monto" autocomplete="off" readonly>
-                        
+                                    <label>Monto:</label>
+                                    <input type="text" id="montoDeCheque" name="montoDeCheque" readonly>
                                     <br><br>
-                                    <button type="reset">Nuevo</button>
-    
+
+<!----------------------------------BOTONES DE LA SEGUNDA COLUMNA CREACION DE CHEQUE--------------------------------------------------------------------->                        
+                                    
+                                    <button type="reset">Nuevo Cheque</button>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------------->
                             </div>
                         </div>
                     </div>
                   </div>
-                  <script src="../javascript/creacion.js"></script>
             </form>
         </div>
     </section>
 
+<!----------------SEGUNDA #2 SECCION ANULACION DE CHEQUES--------------------------------------------------------------------------------------------------->
+
     <section id="seccionAnulacion" style="display: none;">
         <div class="container-fluid">
-            <form id="anulacion" name="anulacion">
-            
+            <form id="anulacionDeCheque" name="anulacionDeCheque">
                 <div class="card">
                     <h5 class="card-header">Anulación</h5>
                     <div class="card-body">
                         <div class="row">
+
+<!----------------------------PRIMERA COLUMNA DE ANULACION DE CHEQUES---------------------------------------------------------------------------------------------------->
+
                             <div class="col-md-6">
-                                <label for="noCheque">No. Cheque:</label>
-                                <input type="text" id="noCheque" name="noCheque" autocomplete="off">
-                          
-                                    <button id="buscar" name="buscar" type="submit">Buscar</button>
-                                    
-                                    <label for="fecha">Fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" >
+                                <label>No. Cheque:</label>
+                                <input type="text" id="numeroChequeAnulacion" name="numeroChequeAnulacion" autocomplete="off">
+
+<!-----------------------------------BOTON DE LA PRIMERA COLUMNA ANULACION DE CHEQUE------------------------------------------------------------------>
+
+                                    <button id="buscarDeAnulacion" name="buscarDeAnulacion" type="submit">Buscar</button>
+
+<!----------------------------------------------------------------------------------------------------------------------------------------------------->                                    
+                                    <label>Fecha:</label>
+                                    <input type="date" id="fechaDeAnulacion" name="fechaDeAnulacion" readonly>
                             
-                                    <label for="beneficiario"> Paguese a la orden de:</label>
-                                    <input type="text" id="beneficiario" name="beneficiario" autocomplete="off" >
+                                    <label>Paguese a la orden de:</label>
+                                    <input type="text" id="beneficiarioDeAnulacion" name="beneficiarioDeAnulacion" readonly>
                             
-                                    <label for="cantidad">La suma de:</label>
-                                    <input type="text" id="cantidad" name="cantidad" autocomplete="off">
+                                    <label>La suma de:</label>
+                                    <input type="text" id="sumaDeAnulacion" name="sumaDeAnulacion" readonly>
                             
-                                    <label for="detalle">Descripción de gasto:</label>
-                                    <input type="text" id="detalle" name="detalle"  autocomplete="off">
-    
+                                    <label>Descripción de gasto:</label>
+                                    <input type="text" id="detalleDeAnulacion" name="detalleDeAnulacion" readonly>
                             </div>
-                            
+
+<!---------------------------SEGUNDA COLUMNA DE ANULACION DE CHEQUES----------------------------------------------------------------------->
+
                             <div class="col-md-6">
     
                             <label for="fechaAnulacion">Fecha de Anulación:</label>
-                            <input type="date" id="fechaAnulacion" name="fechaAnulacion" autocomplete="off">
+                            <input type="date" id="fechaAnulacion" name="fechaAnulacion" autocomplete="off" required>
       
-                            <label for="detalleAnulacion">Detalle de Anulación:</label>
-                            <textarea id="detalleAnulacion" name="detalleAnulacion" autocomplete="off"></textarea>
+                            <label>Detalle de Anulación:</label>
+                            <textarea id="detalleDeAnulacion" name="detalleDeAnulacion" autocomplete="off" required></textarea>
+
+<!---------------------------BOTON DE LA SEGUNDA COLUMNA ANULACION DE CHEQUE---------------------------------------------------------------->
+
                             <button type="submit">Anular</button>
-                            
+
+<!------------------------------------------------------------------------------------------------------------------------------------------->                            
                             </div>
                         </div>
                     </div>
                   </div>
-                  <script src="../javascript/anulacion.js"></script>
             </form>
         </div>
     </section>
+
+<!----------------TERCERA #3 SECCION SACAR DE CIRCULACION--------------------------------------------------------------------------------------------------->
 
     <section id="seccionSaCirculacion" style="display: none;">
         <div class="container-fluid">
@@ -147,10 +167,13 @@
                     <h5 class="card-header">Sacar cheques de circulación</h5>
                     <div class="card-body">
                         <div class="row">
+
+<!----------------------------PRIMERA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------------------------------------------->
+
                             <div class="col-md-6">
                                 <form>
-                                    <label for="noCheque">No. Cheque:</label>
-                                    <input type="text" id="noCheque" name="noCheque" autocomplete="off">
+                                    <label>No. Cheque:</label>
+                                    <input type="text" id="numeroChequeCirculacion" name="numeroChequeCirculacion" autocomplete="off">
                               
                                     <button type="button">Buscar</button>
                               

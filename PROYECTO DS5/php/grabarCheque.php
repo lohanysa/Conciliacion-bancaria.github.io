@@ -8,6 +8,7 @@ require_once "../conexion/conexion.php";
  //Si lo está, se asigna su valor a la variable $nombre, que luego se puede usar según sea necesario. 
  //Si el campo 'nombre' no está presente, se muestra un mensaje indicando que no se ha enviado el campo.
  //if (isset($_POST["numero"])) {
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 $numero_cheque = $_POST['numero'];
  $verificarNum = mysqli_prepare($est, 'SELECT numero_cheque FROM cheques WHERE numero_cheque= ?');
  mysqli_stmt_bind_param($verificarNum, 's', $numero_cheque);
@@ -15,8 +16,7 @@ $numero_cheque = $_POST['numero'];
  $resultado = mysqli_stmt_get_result($verificarNum);
 $fila= mysqli_num_rows($resultado) ;
  if($fila > 0) {
-    //es buena idea enviarlo como un diccionario :)
-        echo json_encode(array('message' => 'El número ' . $numero_cheque . ' ya existe'));
+        echo json_encode(('message El número ' . $numero_cheque . ' ya existe'));
         
         }else{
             try {
@@ -40,6 +40,9 @@ $fila= mysqli_num_rows($resultado) ;
             
         }
  //}
+
+}
+
 ?>
 
 

@@ -32,7 +32,7 @@
     <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
             <!--method="post" action="../php/grabarCheque.php"-->
-            <form id="crear" name="crear" method="post" action="../php/grabarCheque.php">
+            <form id="crear" name="crear" >
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">

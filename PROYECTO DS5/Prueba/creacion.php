@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../style/estilo.css">
 </head>
 <body>
-<form method="post" action='../php/grabarCheque.php' >
+<form  >
             <label for="numero">No. de Cheque:</label>
             <input type="text" id="numero" name="numero" value="0" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio">
     
@@ -19,10 +19,10 @@
             </select>
             <br><br>
             <label for="cantidad">La suma de:</label>
-            <input type="text" id="cantidad" name="cantidad" value="0" required onkeydown="return numeropunto(event)" autocomplete="off">
+            <input type="text" id="cantidad" name="cantidad2" value="0" required onkeydown="return numeropunto(event)" autocomplete="off">
     
             <label for="detalle">Detalle:</label>
-            <input type="text" id="detalle" name="detalle" value="detalle" required autocomplete="off" >
+            <input type="text" id="detalle" name="detalleCreacion" value="detalle" required autocomplete="off" >
     <br><br>
         </div>
         <div class="section">

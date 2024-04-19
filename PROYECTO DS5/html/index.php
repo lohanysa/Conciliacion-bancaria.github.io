@@ -175,28 +175,40 @@
                                     <label>No. Cheque:</label>
                                     <input type="text" id="numeroChequeCirculacion" name="numeroChequeCirculacion" autocomplete="off">
                               
+<!---------------------------BOTON DE LA PRIMERA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------->
+
                                     <button type="button">Buscar</button>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------->
                               
-                                    <label for="fecha">Fecha:</label>
-                                    <input type="date" id="fecha" name="fecha" autocomplete="off" >
+                                    <label>Fecha:</label>
+                                    <input type="date" id="fechaDeSacarCirculacion" name="fechaDeSacarCirculacion" readonly >
                               
-                                    <label for="paguese"> Paguese a la Orden de:</label autocomplete="off">
-                                    <input type="text" id="paguese" name="paguese" >
+                                    <label> Paguese a la Orden de:</label autocomplete="off">
+                                    <input type="text" id="pagueseSacarCirculacion" name="pagueseSacarCirculacion" readonly>
                               
                                     <label for="suma">La suma de:</label>
-                                    <input type="text" id="suma" name="suma" autocomplete="off" >
+                                    <input type="text" id="sumaDeSacarCirculacion" name="sumaDeSacarCirculacion" readonly>
                               
                                     <label for="descripcion">Descripción de Gasto:</label>
-                                    <input type="text" id="descripcion" name="descripcion" autocomplete="off" >
+                                    <input type="text" id="descripcionSacarCirculacion" name="descripcionSacarCirculacion" readonly>
                                   </form>
                             </div>
                             
+<!---------------------------SEGUNDA COLUMNA DE SACAR DE CIRCULACION----------------------------------------------------------------------->
+
                             <div class="col-md-6">
                                 <form>
-                                    <label for="fechaAnulacion">Fecha/Banco</label>
-                                    <input type="date" id="fechaAnulacion" name="fechaAnulacion" autocomplete="off">
+                                    <label>Fecha/Banco</label>
+                                    <input type="date" id="fechaSacarCirculacion" name="fechaSacarCirculacion" autocomplete="off" required>
                                     <br><br>
+
+<!---------------------------BOTON DE LA SEGUNDA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------->
+
                                     <button type="submit">Sacar de circulacion</button>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+
                                 </form>
                             </div>
                         </div>
@@ -206,27 +218,38 @@
         </div>
     </section>
 
+<!----------------CUARTA #4 SECCION OTRAS TRANSACCIONES--------------------------------------------------------------------------------------------------->
+
     <section id="seccionOtrsTransacciones" style="display: none;">
-        <div class="containerTransac" id="containerTransac">
+        <div class="container-fluid">
             <form>
                 <div class="card">
                     <h5 class="card-header">Otras transacciones - Depósitos, Ajustes, Notas (Db/Cr)</h5>
                     <div class="card-body">
                         <div class="row">
+
+<!---------------------------PRIMERA COLUMNA DE ANULACION DE SACAR DE CIRCULACION----------------------------------------------------------------------->
+
                             <div class="col-md-6">
                                 <form>
                                   <label>Transacción</label>
-                                  <input type="text">
+                                  <input type="text" id="transaccionOtrasTrans" name="transaccionOtrasTrans">
                     
-                                  <label for="fecha">Fecha:</label>
-                                  <input type="date" id="fecha" name="fecha" >
+                                  <label>Fecha:</label>
+                                  <input type="date" id="fechaOtrasTrans" name="fechaOtrasTrans">
                     
-                                  <label for="monto1">Monto:</label>
-                                  <input type="text" id="monto1" name="monto1" autocomplete="off" >
+                                  <label>Monto:</label>
+                                  <input type="text" id="montoOtrasTrans" name="montoOtrasTrans" autocomplete="off" >
                     
                                   <br><br>
+
+<!---------------------------BOTON DE LA PRIMERA COLUMNA DE OTRAS TRANSACCIONES---------------------------------------------------------------->
+
                                   <button type="submit">Grabar</button>
                                   <button type="submit">Nuevo</button>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+
                                 </form>
                             </div>
                         </div>
@@ -235,6 +258,8 @@
             </form>
         </div>
     </section>
+
+<!----------------QUINTA #5 SECCION CONCILIACION--------------------------------------------------------------------------------------------------->
 
     <section id="seccionConciliacion" style="display: none;">
         <div class="container-fluid ">
@@ -242,14 +267,16 @@
             <div class="card">
                     <h5 class="card-header">Conciliación Bancaria</h5>
                     <div class="card-body">
-                        
                         <div class="row">
+
+<!---------------------------PRIMERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+
                             <div class="col-md-6">
                                 <div class="card-body">
                                   
                                     <div style="text-align: right;">
                                         <label for="mes">Mes</label>
-                                        <input type="text" id="mes" style="width: 150px;">
+                                        <input type="text" id="mesConciliacion" name="mesConciliacion" style="width: 150px;">
                                     </div>
                                   
                                   <br>
@@ -292,12 +319,18 @@
                                   
                                   <br><br><br>
 
+<!---------------------------BOTON DE LA PRIMERA COLUMNA DE CONCILIACION---------------------------------------------------------------->
+
                                   <button type="submit">Grabar</button>
                                   <button type="reset">Nuevo</button>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------->
                                 
                                 </div>
                             </div>
                             
+<!---------------------------SEGUNDA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+
                             <div class="col-md-3">
                                 <div class="card-body">
                                     
@@ -335,6 +368,8 @@
                                 </div>
                             </div>
                             
+<!---------------------------TERCERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+
                             <div class="col-md-3">
                                 <div class="card-body">
                                   

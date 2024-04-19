@@ -77,16 +77,6 @@ label {
   margin-top: 80px; /* Espacio entre la barra de navegación y el contenedor */
 }
 
-.containerTransac {
-  position: absolute; /* Posicionamiento absoluto para centrar verticalmente */
-  top: 50%; /* Ubica el contenedor en el 50% del borde superior */
-  left: 50%; /* Ubica el contenedor en el 50% del borde izquierdo */
-  transform: translate(-50%, -50%); /* Centra verticalmente y horizontalmente */
-  width: 60%; /* Ancho del contenedor */
-  max-width: 1000px; /* Máximo ancho del contenedor */
-  margin-top: 0px; /* Espacio entre la barra de navegación y el contenedor */
-}
-
 textarea {
   width: 100%;
   padding: 8px;

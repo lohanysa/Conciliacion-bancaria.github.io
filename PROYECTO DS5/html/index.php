@@ -46,7 +46,7 @@
                                 <h5 class="card-title">Cheque</h5>
                             
                                 <label>No. de Cheque:</label>
-                                <input type="text" id="numeroDeCheque" name="numeroDeCheque" autocomplete="off"  onkeypress= "return solonumeros(event)" maxlength="5" placeholder="Campo obligatorio" required >
+                                <input type="text" id="numeroDeCheque" name="numeroDeCheque" autocomplete="off" onkeypress= "return solonumeros(event)" maxlength="5" placeholder="Campo obligatorio" required >
 
                                 <label>Fecha:</label>
                                 <input type="date" id="fechaDeCheque" name="fechaDeCheque" required>
@@ -115,7 +115,7 @@
 
                             <div class="col-md-6">
                                 <label>No. Cheque:</label>
-                                <input type="text" id="numeroChequeAnulacion" name="numeroChequeAnulacion" autocomplete="off">
+                                <input type="text" id="numeroChequeAnulacion" name="numeroChequeAnulacion" autocomplete="off" onkeypress= "return solonumeros(event)" maxlength="5">
 
 <!-----------------------------------BOTON DE LA PRIMERA COLUMNA ANULACION DE CHEQUE------------------------------------------------------------------>
 
@@ -173,7 +173,7 @@
                             <div class="col-md-6">
                                 <form>
                                     <label>No. Cheque:</label>
-                                    <input type="text" id="numeroChequeCirculacion" name="numeroChequeCirculacion" autocomplete="off">
+                                    <input type="text" id="numeroChequeCirculacion" name="numeroChequeCirculacion" autocomplete="off" onkeypress= "return solonumeros(event)" maxlength="5">
                               
 <!---------------------------BOTON DE LA PRIMERA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------->
 

@@ -60,7 +60,7 @@
 
                                 <label>La suma de:</label>
                                 <div style="display: flex;">
-                                    <input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="sumaDeCheque" name="sumaDeCheque" autocomplete="off" onkeypress="return numerosPunto(event)" maxlength="10" required >
+                                    <input type="text" style="width: 30%; margin-right: 10px; text-align: right;" id="sumaDeCheque" name="sumaDeCheque" autocomplete="off" onkeypress="return numerosPunto(event)" maxlength="10" onchange="mostrarMontoEnLetras()" required >
                                     <input type="text" style="width: 70%;" id="sumaEnLetras" name="sumaEnLetras" readonly>
                                 </div>
                             

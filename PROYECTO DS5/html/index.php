@@ -239,7 +239,7 @@
                                   <input type="date" id="fechaOtrasTrans" name="fechaOtrasTrans">
                     
                                   <label>Monto:</label>
-                                  <input type="text" id="montoOtrasTrans" name="montoOtrasTrans" autocomplete="off" >
+                                  <input type="text" id="montoOtrasTrans" name="montoOtrasTrans" autocomplete="off" onkeypress="return numerosPunto(event)" maxlength="10">
                     
                                   <br><br>
 

@@ -36,3 +36,26 @@ function numerosPunto(evento) {
   }
 }  
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener los elementos input
+    const sumaDeChequeInput = document.getElementById('sumaDeCheque');
+    const montoDeChequeInput = document.getElementById('montoDeCheque');
+
+    // Función para actualizar el valor del input montoDeCheque
+    function actualizarMontoDeCheque() {
+        // Obtener el valor del input sumaDeCheque
+        const sumaDeChequeValue = sumaDeChequeInput.value.trim();
+
+        // Verificar si el valor es un número válido
+        if (!isNaN(sumaDeChequeValue) && sumaDeChequeValue !== '') {
+            // Actualizar el valor del input montoDeCheque
+            montoDeChequeInput.value = sumaDeChequeValue;
+        } else {
+            // Si el valor no es válido, dejar el input montoDeCheque vacío
+            montoDeChequeInput.value = '';
+        }
+    }
+
+    // Agregar evento keyup al input sumaDeCheque para actualizar automáticamente montoDeCheque
+    sumaDeChequeInput.addEventListener('keyup', actualizarMontoDeCheque);
+});

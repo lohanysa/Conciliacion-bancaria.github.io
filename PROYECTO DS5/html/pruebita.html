@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convertir Número a Letras</title>
+</head>
+<body>
+<label for="numero">Ingresa un número:</label>
+<input type="text" id="numero" oninput="validarNumero(this)">
+<label for="numeroLetras">Número en letras:</label>
+<input type="text" id="numeroLetras" readonly>
+
+<script>
+function validarNumero(input) {
+  // Permitir solo números y un punto
+  input.value = input.value.replace(/[^\d.]/g, '');
+
+  // Convertir número a letras
+  var numero = parseFloat(input.value);
+  if (!isNaN(numero)) {
+    var letras = convertirNumeroALetras(numero);
+    document.getElementById('numeroLetras').value = letras;
+  } else {
+    document.getElementById('numeroLetras').value = '';
+  }
+}
+
+function convertirNumeroALetras(numero) {
+  var unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
+  var decenas = ['', 'diez', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
+  var especiales = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
+  var centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
+
+  var numeroStr = numero.toString();
+  var entero = parseInt(numeroStr.split('.')[0]);
+  var decimal = parseInt(numeroStr.split('.')[1]) || 0;
+
+  var letrasEntero = '';
+  var letrasDecimal = '';
+
+  // Convertir parte entera a letras
+  if (entero === 0) {
+    letrasEntero = 'cero';
+  } else {
+    if (entero >= 1000) {
+      letrasEntero += unidades[Math.floor(entero / 1000)] + ' mil ';
+      entero %= 1000;
+    }
+    if (entero >= 100) {
+      letrasEntero += centenas[Math.floor(entero / 100)] + ' ';
+      entero %= 100;
+    }
+    if (entero >= 20) {
+      letrasEntero += decenas[Math.floor(entero / 10)] + ' y ';
+      entero %= 10;
+    } else if (entero >= 10) {
+      letrasEntero += especiales[entero] + ' ';
+      entero = 0;
+    }
+    if (entero > 0) {
+      letrasEntero += unidades[entero];
+    }
+  }
+
+  // Convertir parte decimal a letras
+  if (decimal > 0) {
+    letrasDecimal = ' punto';
+    decimal = Math.floor(decimal / 10); // Solo se muestra la décima
+    if (decimal > 0) {
+      letrasDecimal += ' ' + unidades[decimal];
+    }
+  }
+
+  return letrasEntero.trim() + letrasDecimal;
+}
+</script>
+</body>
+</html>

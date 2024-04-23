@@ -106,3 +106,9 @@ button:hover {
   display: block; /* Cambiado a display: block para asegurar que estén uno debajo del otro */
   margin-bottom: 1px;
 }
+
+#grabarDeCheque.boton-deshabilitado {
+  background: gray; /* Cambia el color de fondo del botón cuando está deshabilitado */
+  color: rgb(85, 15, 15); /* Cambia el color del texto del botón cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor a 'no permitido' cuando pasa sobre el botón deshabilitado */
+}

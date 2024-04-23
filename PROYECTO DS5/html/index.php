@@ -69,7 +69,7 @@
                                 <br><br>
 <!-------------------------------BOTONOES DE LA PRIMERA COLUMNA DE CREACION DE CHEQUE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                 
-                                <button id="grabarDeCheque" name="grabarDeCheque" type="submit">Grabar</button>
+                                <button id="grabarDeCheque" name="grabarDeCheque"  class="#grabarDeCheque.boton-deshabilitado">Grabar</button>
                                 <button type="submit">Imprimir</button>
                             </div>
                             
@@ -412,5 +412,7 @@
             </form>
           </div>
     </section>
+    <!--los scrips van al final -->
+<script src="../javascript/crearCheques.js"></script>
 </body>
 </html>

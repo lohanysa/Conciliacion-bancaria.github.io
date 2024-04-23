@@ -119,7 +119,7 @@
 
 <!-----------------------------------BOTON DE LA PRIMERA COLUMNA ANULACION DE CHEQUE------------------------------------------------------------------>
 
-                                    <button id="buscarDeAnulacion" name="buscarDeAnulacion" type="submit">Buscar</button>
+                                    <button id="buscarDeAnulacion" name="buscarDeAnulacion" >Buscar</button>
 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------->                                    
                                     <label>Fecha:</label>
@@ -414,5 +414,6 @@
     </section>
     <!--los scrips van al final -->
 <script src="../javascript/crearCheques.js"></script>
+<script src="../javascript/anulacion.js"></script>
 </body>
 </html>

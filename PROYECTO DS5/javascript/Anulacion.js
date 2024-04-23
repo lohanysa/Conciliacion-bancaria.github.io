@@ -1,24 +1,24 @@
-var buscar = document.getElementById('buscar');
-var formulario = document.getElementById('anulacion');
-var numero_Cheque = document.getElementById('noCheque');
+var buscar = document.getElementById('buscarDeAnulacion');
+var formulario = document.getElementById('anulacionDeCheque');
+//var numero_Cheque = document.getElementById('noCheque');
 
 buscar.addEventListener('click', function(e){
     e.preventDefault();
     var datos=new FormData(formulario)
-    fetch("../php/anulacion.php", {
+    fetch("../php/anulacion_Verificacion.php", {
         method: 'POST',
         body: datos,
     })
     .then(res=> res.json())
     //aqui va los datos
     .then(datos =>{
-        if (datos ==""){
-            alert("no existe");
+        if (is_array(datos) && count(array_filter(array_keys(datos), 'is_string')) > 0) {
+            document.getElementById('fechaDeAnulacion').value= datos.fechaDeAnulacion
+            document.getElementById('beneficiarioDeAnulacion').value= beneficiarioDeAnulacion
+            document.getElementById('sumaDeAnulacion').value= datos.sumaDeAnulacion
+            document.getElementById('detalleDeAnulacion').value= datos.detalleDeAnulacion
         }else{
-            document.getElementById('fecha').value= datos.fecha
-            document.getElementById('beneficiario').value= datos.beneficiario
-            document.getElementById('cantidad').value= datos.suma
-            document.getElementById('descripcion').value= datos.descripcion
+            alert(datos)
            }
     })
 })

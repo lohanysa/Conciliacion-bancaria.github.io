@@ -2,47 +2,52 @@ var numCheque = document.getElementById('numeroDeCheque');
 var formulario = document.getElementById('crearCheque');
 var grabar = document.getElementById('grabarDeCheque')
 //evento para verificar si el numero existe
+
 numCheque.addEventListener('blur', function(e){
-    e.preventDefault()
-    cheque_data = new FormData(formulario)
-    //envio solo el valor del cheque (numero)
-    fetch('../php/cheque_verificar.php',{
+    e.preventDefault();
+    // Obtener el valor del input del cheque
+    // Crear un objeto FormData para enviar los datos al servidor
+    var num = new URLSearchParams();
+    num.append('numeroDeCheque', numCheque.value);
+    
+    // Envío de la solicitud al servidor
+    fetch('../php/cheque_verificar.php', {
         method: 'POST',
-        body: cheque_data
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded' // Especificar el tipo de contenido URL codificada
+        },
+        body: num // Enviar los datos de la solicitud
     })
-    //ago las promesas 
-    .then(res => res.json())
-    //capto la respuesta del php
+    .then(res => res.text()) // Si el servidor responde con texto, usar res.text() en lugar de res.json()
     .then(verificacion => {
-        if(verificacion!=''){
-            alert(verificacion)
+        if(verificacion.includes('existe')){
+            alert(verificacion);
             document.getElementById('grabarDeCheque').disabled = true;
             document.getElementById('grabarDeCheque').classList.add('boton-deshabilitado');
-        }else{
+        } else {
             document.getElementById('grabarDeCheque').disabled = false;
             document.getElementById('grabarDeCheque').classList.remove('boton-deshabilitado');
         }
-
     })
-})
 
-grabar.addEventListener('click', function(e){
-    e.preventDefault()
-    cheque = new FormData(formulario)
-    //console.log(cheque.value)
-    //envio solo el valor del cheque (numero)
-    fetch('../php/cheque_grabar.php',{
+ });
+
+
+ grabar.addEventListener('click', function(e){
+    e.preventDefault();
+    var formData = new FormData(formulario); // Obtener los datos del formulario
+    
+    fetch('../php/cheque_grabar.php', {
         method: 'POST',
-        body: cheque
+        body: formData // Enviar los datos del formulario directamente
     })
-    //ago las promesas 
     .then(res => res.json())
-    //capto la respuesta del php
-    .then(grabar => {
-        if(grabar.includes('error')){
-            alert('hubo un error')
-        }else{
-            alert('se registro exitosamente ')
+    .then(response => {
+        if (response.startsWith('error')) {
+            alert('Hubo un error: ');
+        } else {
+            alert('Se ha guardado exitosamente.');
         }
     })
-})
+
+});

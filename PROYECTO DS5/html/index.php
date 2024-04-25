@@ -70,7 +70,7 @@
 <!-------------------------------BOTONOES DE LA PRIMERA COLUMNA DE CREACION DE CHEQUE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                 
                                 <button id="grabarDeCheque" name="grabarDeCheque"  class="#grabarDeCheque.boton-deshabilitado">Grabar</button>
-                                <button type="submit">Imprimir</button>
+                                <button>Imprimir</button>
                             </div>
                             
 <!------------------------------SEGUNDA COLUMNA DE CREACION DE CHEQUES------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

@@ -31,23 +31,27 @@ numCheque.addEventListener('blur', function(e){
     })
 
  });
+//  Sí, puedes enviar los datos del formulario utilizando el método URLSearchParams.
+//   Este método crea una nueva estructura de datos similar a un mapa, que permite trabajar con la cadena de
+//    consulta de la URL. Aquí te dejo un ejemplo de cómo puedes hacerlo:
 
 
  grabar.addEventListener('click', function(e){
     e.preventDefault();
-    var formData = new FormData(formulario); // Obtener los datos del formulario
+    var params = new FormData(formulario)
     
     fetch('../php/cheque_grabar.php', {
         method: 'POST',
-        body: formData // Enviar los datos del formulario directamente
+        body: params
     })
     .then(res => res.json())
     .then(response => {
         if (response.startsWith('error')) {
-            alert('Hubo un error: ');
+            alert('Hubo un error:',response);
         } else {
             alert('Se ha guardado exitosamente.');
         }
     })
-
 });
+
+

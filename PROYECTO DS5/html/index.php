@@ -34,7 +34,7 @@
     
 <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
-            <form id="crearCheque" name="crearCheque">
+            <form id="crearCheque" name="crearCheque" >
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
@@ -413,7 +413,7 @@
           </div>
     </section>
     <!--los scrips van al final -->
-<script src="../javascript/crearCheques.js"></script>
+<script src="../javascript/crearCheque_2.js"></script>
 <script src="../javascript/anulacion.js"></script>
 </body>
 </html>

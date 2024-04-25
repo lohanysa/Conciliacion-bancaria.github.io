@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../style/estilo.css">
 </head>
 <body>
-<form  >
+<form id="prueba" name='prueba' >
             <label for="numero">No. de Cheque:</label>
             <input type="text" id="numero" name="numero" value="0" required onkeypress="return solonumeros(event)" autocomplete="off" placeholder="Campo obligatorio">
     
@@ -37,9 +37,10 @@
             <input type="text" id="monto" name="monto" required autocomplete="off">
     <br><br>
             <button type="reset">Nuevo</button>
-            <button type="submit">Grabar</button>
+            <button id='grabar' name='grabar'type="submit">Grabar</button>
             <button type="">Imprimir</button>
           </form>
         </div>
+        <script src="../Prueba/PRUEVA_CRACION.js"></script>
 </body>
         </html>

@@ -1,7 +1,7 @@
 <?php 
 //echo 'ola estoy en grabar';
 require_once "../conexion/conexion.php";
-if($_SERVER["REQUEST_METHOD"]=="POST"){
+if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['numeroDeCheque'])){
     $numCheque = $_POST['numeroDeCheque'];
     $fecha = $_POST["fechaDeCheque"];
     $beneficiario = $_POST["beneficiarioDeCheque"];
@@ -22,8 +22,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       }else{
          echo json_encode('error en la preraracion de la consulta: '.mysqli_stmt_errno($stmt));
       }
+    }else{
+      echo json_encode('error: '. 'las variables estan vacias');
     }
-   
 
     $est->close();
 ?>

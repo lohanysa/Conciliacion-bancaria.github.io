@@ -413,7 +413,7 @@
           </div>
     </section>
     <!--los scrips van al final -->
-<script src="../javascript/crearCheque_2.js"></script>
+<script src="../javascript/crearCheque.js"></script>
 <script src="../javascript/anulacion.js"></script>
 </body>
 </html>

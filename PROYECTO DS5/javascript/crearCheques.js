@@ -38,7 +38,7 @@ numCheque.addEventListener('blur', function(e){
 
  grabar.addEventListener('click', function(e){
     e.preventDefault();
-    var params = new FormData(formulario)
+    const params = new FormData(formulario)
     
     fetch('../php/cheque_grabar.php', {
         method: 'POST',

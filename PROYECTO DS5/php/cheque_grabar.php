@@ -1,5 +1,8 @@
 <?php 
 //echo 'ola estoy en grabar';
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+
 require_once "../conexion/conexion.php";
 if($_SERVER["REQUEST_METHOD"]=="POST" && isset($_POST['numeroDeCheque'])){
     $numCheque = $_POST['numeroDeCheque'];

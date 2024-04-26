@@ -14,7 +14,7 @@ buscar.addEventListener('click', function(e){
     .then(datos =>{
         if (typeof datos === 'object' &&  Object.keys(datos).length > 0) {
             document.getElementById('fechaDeAnulacion').value = datos.fechaDeAnulacion;
-            document.getElementById('beneficiarioDeAnulacion').value = datos.beneficiarioDeAnulacion; // No se proporciona en el diccionario PHP
+            document.getElementById('beneficiarioDeAnulacion').value = datos.beneficiarioDeAnulacion; 
             document.getElementById('sumaDeAnulacion').value = datos.sumaDeAnulacion;
             document.getElementById('detalleDeAnulacion').value = datos.detalleDeAnulacion;
         }else{
@@ -32,7 +32,7 @@ formulario.addEventListener('submit', function(e){
     var datos=new FormData(formulario)
     //el metodo fetch envia la informacion al formulario, por defecto utiliza el mtodo get
     //pero lo podemos modificar diciendole que utilize el metodo post
-    fetch("../php/anulacion .php", {
+    fetch("../php/anulacion_update.php", {
         method: 'POST',
         body: datos
     })
@@ -41,6 +41,6 @@ formulario.addEventListener('submit', function(e){
     .then(res=> res.json())
     //aqui va los datos
     .then(data =>{
-        console.log(data)
+        alert(data)
         })
     }) 

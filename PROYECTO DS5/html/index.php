@@ -34,7 +34,8 @@
     
 <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
-            <form id="crearCheque" name="crearCheque" >
+            <!--method="post" action="../php/cheque_grabar.php"-->
+            <form id="crearCheque" name="crearCheque" method="post" action="../php/cheque_grabar.php" >
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
@@ -69,7 +70,7 @@
                                 <br><br>
 <!-------------------------------BOTONOES DE LA PRIMERA COLUMNA DE CREACION DE CHEQUE------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
                                 
-                                <button id="grabarDeCheque" name="grabarDeCheque"  class="#grabarDeCheque.boton-deshabilitado">Grabar</button>
+                                <button id="grabarDeCheque" name="grabarDeCheque" type="submit" class="#grabarDeCheque.boton-deshabilitado">Grabar</button>
                                 <button>Imprimir</button>
                             </div>
                             

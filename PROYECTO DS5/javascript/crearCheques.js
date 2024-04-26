@@ -6,7 +6,8 @@ var grabar = document.getElementById('grabarDeCheque')
 
 //ESTE EVENTO SI FUNCIONA :)
 
-
+//ESTE EVENTO ES PARA VERIFICAR QUE EL NUMERO DE CK NO EXISTA 
+//SOLO TOMA EL INPUT DE NUMERO DE CK Y VERIFICA 
 numCheque.addEventListener('blur', function(e){
     e.preventDefault();
     // Obtener el valor del input del cheque
@@ -42,9 +43,9 @@ numCheque.addEventListener('blur', function(e){
 
 
 //ESTE EVENTO NO FUNCIONA NO ENVIA EL FORMULARIO
+//ESTE EVENTO ES EL QUE GRABA
 
-
- grabar.addEventListener('click', function(e){
+ /*grabar.addEventListener('click', function(e){
     e.preventDefault();
 
     //SOSPECHO QUE EL PROBLEMA ES ESTE SEÑOR (FormData)
@@ -62,6 +63,6 @@ numCheque.addEventListener('blur', function(e){
             alert('Se ha guardado exitosamente.');
         }
     })
-});
+});*/
 
 

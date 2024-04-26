@@ -29,44 +29,66 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         echo json_encode('No existe el numero de cheque: '.$numCk);
 
          
-        //elif encaso de que ya este anulado 
+        //else encaso de que ya este anulado 
       }else{
-
+        // Obtener una fila de resultados como un array asociativo
+          $fila_resultado = mysqli_fetch_assoc($resultado);
 
         //verifica que el cheque no este anulado
-        if($resultado['fecha_anulado']=='0000-00-00' || (is_null($resultado['fecha_anulado']))){
+        if( $fila_resultado['fecha_anulado']=='0000-00-00' || (is_null( $fila_resultado['fecha_anulado']))){
 
-          $proveedores = 'SELECT nombre FROM proveedores WHERE codigo= ? ';
+          $proveedores = 'SELECT nombre,codigo FROM proveedores WHERE codigo= ? ';
 
           //verificar que la preparacion de consulta tuvo exito
           if($stmt_2 = mysqli_prepare($est, $proveedores)){
-  
-            mysqli_stmt_bind_param($stmt_2, 's', $resultado['beneficiario']);
+
+
+            $beneficiario = $fila_resultado['beneficiario'];
+
+            mysqli_stmt_bind_param($stmt_2, 's', $beneficiario);
             mysqli_stmt_execute($stmt_2);
   
   
             //guardo los resultado de la consulta 
            $resultado_proveedor =mysqli_stmt_get_result($stmt_2);
+            //paso los resultados a un array asociativo
+            $fila_proveedor= mysqli_fetch_assoc($resultado_proveedor);
 
-            //paso los valores en un diccionario
-           while($fila = mysqli_fetch_array($resultado)){
-            $diccionario =  array(
-              'fechaDeAnulacion' => $fila['fecha'],
-              'sumaDeAnulacion' => $fila['monto'],
-              'detalleDeAnulacion' => $fila['descripcion'],
-              );
+
+            /*******************ESTA PARTE ES PARA MANDAR LOS DATOS AL JS *********************************/
+
+
+
+            // Construir el diccionario
+            $diccionario = array(
+              'fechaDeAnulacion' => $fila_resultado['fecha'],
+              'sumaDeAnulacion' => $fila_resultado['monto'],
+              'detalleDeAnulacion' => $fila_resultado['descripcion'],
+              //'beneficiarioDeAnulacion' => $fila_resultado['beneficiario']
+          );
+
+
+          //beneficiario lo guardo aparte porque por alguna razon dice que esta null, voy hacer una condicion 
+          //para ese error
+
+          if($fila_proveedor) {
+           // Verificar si el campo 'nombre' está presente y no es nulo
+           if(isset($fila_proveedor['nombre']) && $fila_proveedor['nombre'] !== null) {
+            // Si el campo 'nombre' no es nulo, asignarlo al diccionario
+             $diccionario['beneficiarioDeAnulacion'] = $fila_proveedor['nombre'];
+          } else {
+            // Si el campo 'nombre' es nulo, asignar un valor predeterminado
+            $diccionario['beneficiarioDeAnulacion'] = "Nombre no disponible";
+            }
+          }else {
+          // Si la consulta no devolvió ninguna fila, asignar un valor predeterminado
+          $diccionario['beneficiarioDeAnulacion'] = "No se encontró beneficiario";
+      }   
+          // Enviar respuesta al script
+          echo json_encode($diccionario);
            }
-           //añadi el beneficiario fuera del while, por que es una sola respuesta 
-           $diccionario['beneficiarioDeAnulacion'] = $resultado_proveedor['nombre'];
-
-             //envio respuesta a el script
-             echo json_encode($diccionario);
-           }
-
-
        
         }else{
-
           echo json_encode('El cheque esta anulado');
         }
         

@@ -12,11 +12,11 @@ buscar.addEventListener('click', function(e){
     .then(res=> res.json())
     //aqui va los datos
     .then(datos =>{
-        if (is_array(datos) && count(array_filter(array_keys(datos), 'is_string')) > 0) {
-            document.getElementById('fechaDeAnulacion').value= datos.fechaDeAnulacion
-            document.getElementById('beneficiarioDeAnulacion').value= beneficiarioDeAnulacion
-            document.getElementById('sumaDeAnulacion').value= datos.sumaDeAnulacion
-            document.getElementById('detalleDeAnulacion').value= datos.detalleDeAnulacion
+        if (typeof datos === 'object' &&  Object.keys(datos).length > 0) {
+            document.getElementById('fechaDeAnulacion').value = datos.fechaDeAnulacion;
+            document.getElementById('beneficiarioDeAnulacion').value = datos.beneficiarioDeAnulacion; // No se proporciona en el diccionario PHP
+            document.getElementById('sumaDeAnulacion').value = datos.sumaDeAnulacion;
+            document.getElementById('detalleDeAnulacion').value = datos.detalleDeAnulacion;
         }else{
             alert(datos)
            }

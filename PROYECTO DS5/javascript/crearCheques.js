@@ -3,6 +3,10 @@ var formulario = document.getElementById('crearCheque');
 var grabar = document.getElementById('grabarDeCheque')
 //evento para verificar si el numero existe
 
+
+//ESTE EVENTO SI FUNCIONA :)
+
+
 numCheque.addEventListener('blur', function(e){
     e.preventDefault();
     // Obtener el valor del input del cheque
@@ -36,8 +40,14 @@ numCheque.addEventListener('blur', function(e){
 //    consulta de la URL. Aquí te dejo un ejemplo de cómo puedes hacerlo:
 
 
+
+//ESTE EVENTO NO FUNCIONA NO ENVIA EL FORMULARIO
+
+
  grabar.addEventListener('click', function(e){
     e.preventDefault();
+
+    //SOSPECHO QUE EL PROBLEMA ES ESTE SEÑOR (FormData)
     const params = new FormData(formulario)
     
     fetch('../php/cheque_grabar.php', {

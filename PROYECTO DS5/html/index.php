@@ -163,7 +163,7 @@
 
     <section id="seccionSaCirculacion" style="display: none;">
         <div class="container-fluid">
-            <form>
+            <form id="circulacion__Form" name="circulacion__Form">
                 <div class="card">
                     <h5 class="card-header">Sacar cheques de circulación</h5>
                     <div class="card-body">
@@ -172,13 +172,13 @@
 <!----------------------------PRIMERA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------------------------------------------->
 
                             <div class="col-md-6">
-                                <form>
+                               <!-- <form>-->
                                     <label>No. Cheque:</label>
                                     <input type="text" id="numeroChequeCirculacion" name="numeroChequeCirculacion" autocomplete="off" onkeypress= "return solonumeros(event)" maxlength="5">
                               
 <!---------------------------BOTON DE LA PRIMERA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------->
 
-                                    <button type="button">Buscar</button>
+                                    <button  id="bucar_circulacion" name="bucar_circulacion">Buscar</button>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------->
                               
@@ -193,24 +193,24 @@
                               
                                     <label for="descripcion">Descripción de Gasto:</label>
                                     <input type="text" id="descripcionSacarCirculacion" name="descripcionSacarCirculacion" readonly>
-                                  </form>
+                                <!--  </form>-->
                             </div>
                             
 <!---------------------------SEGUNDA COLUMNA DE SACAR DE CIRCULACION----------------------------------------------------------------------->
 
                             <div class="col-md-6">
-                                <form>
+                               <!-- <form>-->
                                     <label>Fecha/Banco</label>
                                     <input type="date" id="fechaSacarCirculacion" name="fechaSacarCirculacion" autocomplete="off" required>
                                     <br><br>
 
 <!---------------------------BOTON DE LA SEGUNDA COLUMNA DE SACAR DE CIRCULACION---------------------------------------------------------------->
 
-                                    <button type="submit">Sacar de circulacion</button>
+                                    <button type="submit" id="sacarCirculacionSubmint" name="sacarCirculacionSubmint">Sacar de circulacion</button>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 
-                                </form>
+                                <!--</form>-->
                             </div>
                         </div>
                     </div>

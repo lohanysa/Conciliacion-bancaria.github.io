@@ -415,6 +415,6 @@
     </section>
     <!--los scrips van al final -->
 <script src="../javascript/crearCheques.js"></script>
-<script src="../javascript/anulacion.js"></script>
+<script src="../javascript/Anulacion_circulacion.js"></script>
 </body>
 </html>

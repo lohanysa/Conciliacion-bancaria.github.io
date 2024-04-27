@@ -133,6 +133,7 @@ formulario.addEventListener('submit', function(e){
         })
         .then(res=> res.json())
         //aqui va los datos
+        
         .then(datos_tran =>{
             if (datos_tran.includes('error')) {
                 

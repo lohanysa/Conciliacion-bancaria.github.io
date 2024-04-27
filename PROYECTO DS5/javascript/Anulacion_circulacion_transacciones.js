@@ -118,3 +118,30 @@ formulario.addEventListener('submit', function(e){
 
                 })
     }) 
+
+    /**************************OTRA TRANSACCIONES************************************/
+    var transacciones = document.getElementById('transaccion')
+
+    transacciones.addEventListener('submit', function(e){
+
+        e.preventDefault();
+
+        var tranc =new FormData( transacciones)
+        fetch("../php/transacciones.php", {
+            method: 'POST',
+            body: tranc,
+        })
+        .then(res=> res.json())
+        //aqui va los datos
+        .then(datos_tran =>{
+            if (datos_tran.includes('error')) {
+                
+            }
+            
+            if(datos_tran.includes('vacio')){
+               
+            }else{
+                alert(datos_tran)
+              }
+        })
+    })

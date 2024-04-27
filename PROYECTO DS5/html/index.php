@@ -223,7 +223,7 @@
 
     <section id="seccionOtrsTransacciones" style="display: none;">
         <div class="container-fluid">
-            <form>
+            <form id="transaccion" name="transaccion">
                 <div class="card">
                     <h5 class="card-header">Otras transacciones - Depósitos, Ajustes, Notas (Db/Cr)</h5>
                     <div class="card-body">
@@ -232,10 +232,12 @@
 <!---------------------------PRIMERA COLUMNA DE ANULACION DE SACAR DE CIRCULACION----------------------------------------------------------------------->
 
                             <div class="col-md-6">
-                                <form>
+                                
                                   <label>Transacción</label>
-                                  <input type="text" id="transaccionOtrasTrans" name="transaccionOtrasTrans">
-                    
+                                  <select type="text" id="transaccionOtrasTrans" name="transaccionOtrasTrans">
+                                    <?php transaccion()?>
+                                  </select>
+                                  
                                   <label>Fecha:</label>
                                   <input type="date" id="fechaOtrasTrans" name="fechaOtrasTrans">
                     
@@ -247,11 +249,11 @@
 <!---------------------------BOTON DE LA PRIMERA COLUMNA DE OTRAS TRANSACCIONES---------------------------------------------------------------->
 
                                   <button type="submit">Grabar</button>
-                                  <button type="submit">Nuevo</button>
+                                  <button type="reset">Nuevo</button>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 
-                                </form>
+                                
                             </div>
                         </div>
                     </div>
@@ -415,6 +417,6 @@
     </section>
     <!--los scrips van al final -->
 <script src="../javascript/crearCheques.js"></script>
-<script src="../javascript/Anulacion_circulacion.js"></script>
+<script src="../javascript/Anulacion_circulacion_transacciones.js"></script>
 </body>
 </html>

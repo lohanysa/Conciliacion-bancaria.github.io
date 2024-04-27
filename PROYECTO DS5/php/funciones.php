@@ -38,4 +38,17 @@ function objetoGasto(){
     }
     
 }
+
+function transaccion(){
+    global $est;
+    $tabla_gasto='SELECT * FROM transacciones';
+    $resultado = $est->query($tabla_gasto);
+    while($fila = mysqli_fetch_array($resultado)){
+        $id = $fila['codigo'];
+        $nombre = $fila['detalle'];
+        echo '<option value = "'.$id.'">' . $nombre . '</option>';
+    }
+    
+}
+
 ?>

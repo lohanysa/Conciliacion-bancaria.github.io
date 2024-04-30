@@ -146,3 +146,29 @@ formulario.addEventListener('submit', function(e){
               }
         })
     })
+
+/*******************************************CONCILIACION******************************************************/
+var boton_realizar = document.getElementById('realizar_conciliacion')
+var mes= document.getElementById('mesConciliacion');
+var agno = document.getElementById('agno')
+
+//para mostrar la informacion de conciliacion
+//dependiendo de la fecha(mes y año)
+boton_realizar.addEventListener('clik', function(e){
+
+    e.preventDefault();
+
+    var conciliacion =new FormData()
+    conciliacion.append(mes)
+    conciliacion.append(agno)
+    fetch("../php/transacciones.php", {
+        method: 'POST',
+        body: conciliacion,
+    })
+    .then(res=> res.json())
+    //aqui va los datos
+    
+    .then(datos_conciliacion =>{
+        alert(datos_conciliacion)
+    })
+})

@@ -266,7 +266,7 @@
 
     <section id="seccionConciliacion" style="display: none;">
         <div class="container-fluid ">
-            <form>
+            <form id="conciliacion" name="conciliacion">
             <div class="card">
                     <h5 class="card-header">Conciliación Bancaria</h5>
                     <div class="card-body">
@@ -286,7 +286,7 @@
                                   
                                   <br>
                                   
-                                  <b>SALDO SEGÚN LIBRO AL</b>
+                                  <b id='tiempo' name='tiempo'>SALDO SEGÚN LIBRO AL</b>
                                   
                                   <br><br>
                                   
@@ -340,33 +340,34 @@
                                 <div class="card-body">
                                     
                                     <label>Año</label>
-                                    <input type="text" style="width: 150px;">
-                                    
+                                    <select id="agno" name="agno" style="width: 150px;">
+                                    <?php agnos() ?>
+                                    </select>
                                     <br><br>
                                     
                                     <div class="input-container">
-                                        <input type="text">
-                                        <input type="text">
-                                        <input type="text">
-                                        <input type="text">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="mas_Deposito" id="masdepositos" name="masdepositos">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder=" maschequesanulados" id=" maschequesanulados" name=" maschequesanulados">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="masnotascredito" id="masnotascredito" name="masnotascredito">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="masajusteslibro" id="masajusteslibro" name="masajusteslibro">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>  
                                     </div>
                                     
                                     <br><br>
                                     
                                     <div class="input-container">
-                                        <input type="text">
-                                        <input type="text">
-                                        <input type="text">
+                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>   
                                     </div>
                                     
                                     <br><br><br><br><br><br><br>
 
                                     <div class="input-container">
-                                        <input type="text">
-                                        <input type="text">
-                                        <input type="text">
+                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>
                                     </div>
 
@@ -378,35 +379,35 @@
                             <div class="col-md-3">
                                 <div class="card-body">
                                   
-                                  <button>Realizar Conciliación</button>
+                                  <button id="realizar_conciliacion" name="realizar_conciliacion" >Realizar Conciliación</button>
                                   
                                   <br><br>
                                   
-                                  <input type="text">
+                                  <input type="text" readonly style="background: whitesmoke" placeholder="saldo-anterior" id="saldo_anterior" name="saldo_anterior">
                                   
                                   <br><br><br><br><br><br><br>
                                 
                                   <div class="input-container">
-                                    <input type="text">
-                                    <input type="text">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="subtotal">
+                                    <input type="text" readonly style="background: whitesmoke">
                                   </div>
                                   
                                   <br><br><br><br><br><br>
 
                                   <div class="input-container">
-                                    <input type="text">
-                                    <input type="text">
+                                    <input type="text" readonly style="background: whitesmoke">
+                                    <input type="text" readonly style="background: whitesmoke">
                                   </div>
                                   
-                                  <br><br>
                                   
-                                  <input type="text">
+                                  
+                                  <input type="text" onkeypress= "return solonumeros(event)" require>
                                   
                                   <br><br><br><br><br><br>
 
                                   <div class="input-container">
-                                    <input type="text">
-                                    <input type="text">
+                                    <input type="text" readonly style="background: whitesmoke">
+                                    <input type="text" readonly style="background: whitesmoke">
                                   </div>
 
                                 </div>
@@ -419,6 +420,6 @@
     </section>
     <!--los scrips van al final -->
 <script src="../javascript/crearCheques.js"></script>
-<script src="../javascript/Anulacion_circulacion_transacciones.js"></script>
+<script src="../javascript/otras_pantallas.js"></script>
 </body>
 </html>

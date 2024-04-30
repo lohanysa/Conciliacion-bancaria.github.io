@@ -97,5 +97,14 @@ function transaccion(){
     }
 }
 
+function agnos(){
+    global $est;
+    $consulta = $est->query('SELECT * FROM conciliacion ');
+    while( $fila = mysqli_fetch_assoc($consulta)){
+        echo '<option value="'.$fila['agno'].'">'.$fila['agno'].'</option>';
+    }
+    
+}
+
 
 ?>

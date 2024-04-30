@@ -279,7 +279,9 @@
                                   
                                     <div style="text-align: right;">
                                         <label for="mes">Mes</label>
-                                        <input type="text" id="mesConciliacion" name="mesConciliacion" style="width: 150px;">
+                                        <select type="text" id="mesConciliacion" name="mesConciliacion" style="width: 150px;">
+                                        <?php bucarMes() ?>
+                                        </select>
                                     </div>
                                   
                                   <br>

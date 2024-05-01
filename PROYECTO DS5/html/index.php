@@ -347,7 +347,7 @@
                                     
                                     <div class="input-container">
                                         <input type="text" readonly style="background: whitesmoke" placeholder="mas_Deposito" id="masdepositos" name="masdepositos">
-                                        <input type="text" readonly style="background: whitesmoke" placeholder=" maschequesanulados" id=" maschequesanulados" name=" maschequesanulados">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="maschequesanulados" id="maschequesanulados" name="maschequesanulados">
                                         <input type="text" readonly style="background: whitesmoke" placeholder="masnotascredito" id="masnotascredito" name="masnotascredito">
                                         <input type="text" readonly style="background: whitesmoke" placeholder="masajusteslibro" id="masajusteslibro" name="masajusteslibro">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>  
@@ -356,18 +356,18 @@
                                     <br><br>
                                     
                                     <div class="input-container">
-                                        <input type="text" readonly style="background: whitesmoke">
-                                        <input type="text" readonly style="background: whitesmoke">
-                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="menoschequesgirados" id="menoschequesgirados" name="menoschequesgirados">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="menosnotasdebito" id="menosnotasdebito" name="menosnotasdebito">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="menosajusteslibro" id="menosajusteslibro" name="menosajusteslibro">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>   
                                     </div>
                                     
                                     <br><br><br><br><br><br><br>
 
                                     <div class="input-container">
-                                        <input type="text" readonly style="background: whitesmoke">
-                                        <input type="text" readonly style="background: whitesmoke">
-                                        <input type="text" readonly style="background: whitesmoke">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="masdepositostransito" id="masdepositostransito" name="masdepositostransito">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="menoschequescirculacion" id="menoschequescirculacion" name="menoschequescirculacion">
+                                        <input type="text" readonly style="background: whitesmoke" placeholder="masajustesbanco" id="masajustesbanco" name="masajustesbanco">
                                         <a style="display: block; text-align: right; padding-right: 120px;">Subtotal</a>
                                     </div>
 
@@ -388,26 +388,26 @@
                                   <br><br><br><br><br><br><br>
                                 
                                   <div class="input-container">
-                                    <input type="text" readonly style="background: whitesmoke" placeholder="subtotal">
-                                    <input type="text" readonly style="background: whitesmoke">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="subtotal_1" id="sub1" name="sub1">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="sopongo que es la suma" id="subtotal1" name="subtotal1">
                                   </div>
                                   
                                   <br><br><br><br><br><br>
 
                                   <div class="input-container">
-                                    <input type="text" readonly style="background: whitesmoke">
-                                    <input type="text" readonly style="background: whitesmoke">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="sub2" id="sub2" name="sub2">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder=" saldolibros" id="saldolibros" name="saldolibros">
                                   </div>
                                   
                                   
                                   
-                                  <input type="text" onkeypress= "return solonumeros(event)" require>
+                                  <input type="text" onkeypress= "return solonumeros(event) " placeholder="saldobanco" id="saldobanco" name="saldobanco" require>
                                   
                                   <br><br><br><br><br><br>
 
                                   <div class="input-container">
-                                    <input type="text" readonly style="background: whitesmoke">
-                                    <input type="text" readonly style="background: whitesmoke">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="sub3" id="sub3" name="sub3">
+                                    <input type="text" readonly style="background: whitesmoke" placeholder="saldo igualado" id="saldo_igualado" name="saldo_igualado">
                                   </div>
 
                                 </div>

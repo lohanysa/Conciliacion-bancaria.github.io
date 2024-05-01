@@ -169,6 +169,32 @@ boton_realizar.addEventListener('click', function(e){
     //aqui va los datos
     
     .then(datos_conciliacion =>{
-        alert(datos_conciliacion)
+        if(Object.keys(datos_conciliacion)){
+            /* inputs de la segunda columna*/
+            document.getElementById('masdepositos').value = datos_conciliacion.masdepositos 
+            document.getElementById('maschequesanulados').value =datos_conciliacion.maschequesanulados
+            document.getElementById('masnotascredito').value =datos_conciliacion.masnotascredito
+            document.getElementById('masajusteslibro').value = datos_conciliacion.masajusteslibro
+            document.getElementById('menoschequesgirados').value = datos_conciliacion.menoschequesgirados
+            document.getElementById('menoschequesgirados').value = datos_conciliacion.menoschequesgirados
+            document.getElementById('menosnotasdebito').value = datos_conciliacion.menosnotasdebito
+            document.getElementById('menosajusteslibro').value = datos_conciliacion.menosajusteslibro
+            document.getElementById('masajustesbanco').value = datos_conciliacion.masajustesbanco
+            document.getElementById('menoschequescirculacion').value = datos_conciliacion.menoschequescirculacion
+            document.getElementById('masdepositostransito').value = datos_conciliacion.masdepositostransito
+
+            /*Tercera columna */
+            document.getElementById('saldo_anterior').value = datos_conciliacion.saldo_anterior
+            //creo que aqui va la resta de la columnas
+            document.getElementById('sub1').value= datos_conciliacion.sub1
+            document.getElementById('subtotal1').value = datos_conciliacion.subtotal1
+            document.getElementById('sub2').value = datos_conciliacion.sub2
+            document.getElementById('saldolibros').value = datos_conciliacion.saldolibros
+            document.getElementById('sub3').value = datos_conciliacion.sub3
+            document.getElementById('').value
+        }else{
+            alert(datos_conciliacion)
+        }
+       
     })
 })

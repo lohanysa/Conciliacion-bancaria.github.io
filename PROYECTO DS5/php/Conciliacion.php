@@ -44,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mes ='0'. strval($mes_numero - 1);
                 }
         }
-        $consulta_meses;
 
         $consulta = 'SELECT * FROM conciliacion WHERE mes=? AND agno=? ';
         $preparado = mysqli_prepare($est, $consulta);

@@ -154,6 +154,8 @@ var agno = document.getElementById('agno')
 //para colocar la fecha
 var saldoEnBancoElement = document.getElementById('saldo_en_banco_al')
 
+
+
 //para mostrar la informacion de conciliacion
 //dependiendo de la fecha(mes y año)
 boton_realizar.addEventListener('click', function(e){
@@ -176,7 +178,7 @@ boton_realizar.addEventListener('click', function(e){
 
             //fecha en el saldo banco al 
             var contenidoActual_1 = saldoEnBancoElement.innerHTML;
-            contenidoActual_1 += datos_conciliacion.dia +' DE '+ datos_conciliacion.mes +' DEL '+ datos_conciliacion.agno;
+            contenidoActual_1 += ' '+ datos_conciliacion.dia +' DE '+ datos_conciliacion.mes +' DEL '+ datos_conciliacion.agno;
             saldoEnBancoElement.innerHTML = contenidoActual_1;
             /* inputs de la segunda columna*/
             document.getElementById('masdepositos').value = datos_conciliacion.masdepositos 
@@ -207,6 +209,9 @@ boton_realizar.addEventListener('click', function(e){
     })
 })
 
+
+
+//evento para hacer el calculo de la conciliacion(cuando se ingresa el valor)
 var saldobanco = document.getElementById('saldobanco')
 var sub3 = document.getElementById('sub3')
 var suma
@@ -214,17 +219,25 @@ saldobanco.addEventListener('blur', function(e) {
     e.preventDefault();
     var suma = parseFloat(saldobanco.value) - parseFloat(sub3.value); // Convertir los valores a números
     var saldoIgualado = Math.abs(suma); // Obtener el valor absoluto de la suma
-    document.getElementById('saldo_igualado').value = saldoIgualado ||0;
+    document.getElementById('saldo_igualado').value = (saldoIgualado ||0).toFixed(2);
 });
 
-var grabar_conciliacion = document.getElementById('grabar_conciliacion')
 
+
+
+//evento para guandar la conciliacion
+var grabar_conciliacion = document.getElementById('grabar_conciliacion')
+var conciliacion_form = document.getElementById('conciliacion')
 grabar_conciliacion.addEventListener('click', function(e){
     e.preventDefault()
-    var form_conciliacion = new FormData(grabar_conciliacion)
+    var form_conciliacion = new FormData(conciliacion_form)
 
     fetch('../php/grabar_conciliacion.php',{
         method: 'POST',
         body: form_conciliacion
+    })
+    .then(res=> res.json())
+    .then(mensajes=>{
+        alert(mensajes)
     })
 })

@@ -154,14 +154,14 @@ var agno = document.getElementById('agno')
 
 //para mostrar la informacion de conciliacion
 //dependiendo de la fecha(mes y año)
-boton_realizar.addEventListener('clik', function(e){
+boton_realizar.addEventListener('click', function(e){
 
     e.preventDefault();
 
     var conciliacion =new FormData()
-    conciliacion.append(mes)
-    conciliacion.append(agno)
-    fetch("../php/transacciones.php", {
+    conciliacion.append('mesConciliacion',mes.value)
+    conciliacion.append('agno',agno.value)
+    fetch("../php/Conciliacion.php", {
         method: 'POST',
         body: conciliacion,
     })

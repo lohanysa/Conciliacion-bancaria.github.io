@@ -379,7 +379,7 @@
                             <div class="col-md-3">
                                 <div class="card-body">
                                   
-                                  <button id="realizar_conciliacion" name="realizar_conciliacion" >Realizar Conciliación</button>
+                                  <button id="realizar_conciliacion" name="realizar_conciliacion" type="button" >Realizar Conciliación</button>
                                   
                                   <br><br>
                                   

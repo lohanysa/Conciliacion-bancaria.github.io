@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $mes ='0'. strval($mes_numero - 1);
                 }
         }
+        $consulta_meses;
 
         $consulta = 'SELECT * FROM conciliacion WHERE mes=? AND agno=? ';
         $preparado = mysqli_prepare($est, $consulta);
@@ -54,10 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         if (mysqli_num_rows($resultado) == 0) {
-            echo json_encode('No hay conciliación del mes anterior: '.$mes);
+            echo json_encode('No hay conciliación del mes anterior');
         } else {
             //echo json_encode('valores de la tabla: '. $row['mes'] . $row['agno'] .'valores que calculo: '.$mes . $agno);
             $diccionario = array(
+                'agno' =>$row['agno'],
                 'dia' => $row['dia'],
                 'mes' => $row['mes'],
                 'dia_anterior' => $row['dia_anterior'],

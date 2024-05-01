@@ -151,6 +151,8 @@ formulario.addEventListener('submit', function(e){
 var boton_realizar = document.getElementById('realizar_conciliacion')
 var mes= document.getElementById('mesConciliacion');
 var agno = document.getElementById('agno')
+//para colocar la fecha
+var saldoEnBancoElement = document.getElementById('saldo_en_banco_al')
 
 //para mostrar la informacion de conciliacion
 //dependiendo de la fecha(mes y año)
@@ -169,7 +171,13 @@ boton_realizar.addEventListener('click', function(e){
     //aqui va los datos
     
     .then(datos_conciliacion =>{
-        if(Object.keys(datos_conciliacion)){
+        if(Object.keys(datos_conciliacion) && typeof datos_conciliacion !== 'string'){
+            /*primera columna  */
+
+            //fecha en el saldo banco al 
+            var contenidoActual_1 = saldoEnBancoElement.innerHTML;
+            contenidoActual_1 += datos_conciliacion.dia +' DE '+ datos_conciliacion.mes +' DEL '+ datos_conciliacion.agno;
+            saldoEnBancoElement.innerHTML = contenidoActual_1;
             /* inputs de la segunda columna*/
             document.getElementById('masdepositos').value = datos_conciliacion.masdepositos 
             document.getElementById('maschequesanulados').value =datos_conciliacion.maschequesanulados
@@ -190,11 +198,33 @@ boton_realizar.addEventListener('click', function(e){
             document.getElementById('subtotal1').value = datos_conciliacion.subtotal1
             document.getElementById('sub2').value = datos_conciliacion.sub2
             document.getElementById('saldolibros').value = datos_conciliacion.saldolibros
-            document.getElementById('sub3').value = datos_conciliacion.sub3
-            document.getElementById('').value
+            document.getElementById('sub3').value = Math.abs(datos_conciliacion.sub3)
+            //document.getElementById('').value
         }else{
             alert(datos_conciliacion)
         }
        
+    })
+})
+
+var saldobanco = document.getElementById('saldobanco')
+var sub3 = document.getElementById('sub3')
+var suma
+saldobanco.addEventListener('blur', function(e) {
+    e.preventDefault();
+    var suma = parseFloat(saldobanco.value) - parseFloat(sub3.value); // Convertir los valores a números
+    var saldoIgualado = Math.abs(suma); // Obtener el valor absoluto de la suma
+    document.getElementById('saldo_igualado').value = saldoIgualado ||0;
+});
+
+var grabar_conciliacion = document.getElementById('grabar_conciliacion')
+
+grabar_conciliacion.addEventListener('click', function(e){
+    e.preventDefault()
+    var form_conciliacion = new FormData(grabar_conciliacion)
+
+    fetch('../php/grabar_conciliacion.php',{
+        method: 'POST',
+        body: form_conciliacion
     })
 })

@@ -534,7 +534,7 @@ function mostrarMontoEnLetras() {
     var monto = parseFloat(document.getElementById("sumaDeCheque").value);
     var parteEntera = Math.floor(monto);
     var parteDecimal = Math.round((monto - parteEntera) * 100);
-    var montoEnLetras = numeroALetras(parteEntera) + ' balboas con ' + (parteDecimal < 10 ? '0' : '') + parteDecimal + ' centavos';
+    var montoEnLetras = numeroALetras(parteEntera) + ' balboas con ' + (parteDecimal < 10 ? '0' : '') + parteDecimal + ' /100 centavos';
     document.getElementById("sumaEnLetras").value = montoEnLetras;
 }
 

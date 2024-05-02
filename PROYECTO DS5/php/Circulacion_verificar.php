@@ -38,62 +38,65 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     
             //verifica que el cheque no este anulado
             if( $fila_resultado['fecha_circulacion']=='0000-00-00' || (is_null( $fila_resultado['fecha_circulacion']))){
+
+                if($fila_resultado['fecha_anulado']=='0000-00-00' || (is_null( $fila_resultado['fecha_anulado']))){
+                  $proveedores = 'SELECT nombre,codigo FROM proveedores WHERE codigo= ? ';
     
-              $proveedores = 'SELECT nombre,codigo FROM proveedores WHERE codigo= ? ';
-    
-              //verificar que la preparacion de consulta tuvo exito
-              if($stmt_2 = mysqli_prepare($est, $proveedores)){
-    
-    
-                $beneficiario = $fila_resultado['beneficiario'];
-    
-                mysqli_stmt_bind_param($stmt_2, 's', $beneficiario);
-                mysqli_stmt_execute($stmt_2);
-      
-      
-                //guardo los resultado de la consulta 
-               $resultado_proveedor =mysqli_stmt_get_result($stmt_2);
-                //paso los resultados a un array asociativo
-                $fila_proveedor= mysqli_fetch_assoc($resultado_proveedor);
-    
-    
-                /*******************ESTA PARTE ES PARA MANDAR LOS DATOS AL JS *********************************/
-    
-    
-    
-                // Construir el diccionario
-                $diccionario = array(
-                  'fechaDeSacarCirculacion' => $fila_resultado['fecha'],
-                  'sumaDeSacarCirculacion' => $fila_resultado['monto'],
-                  'descripcionSacarCirculacion' => $fila_resultado['descripcion'],
-                  //'beneficiarioDeAnulacion' => $fila_resultado['beneficiario']
-              );
-    
-    
-              //beneficiario lo guardo aparte porque por alguna razon dice que esta null, voy hacer una condicion 
-              //para ese error
-    
-              if($fila_proveedor) {
-               // Verificar si el campo 'nombre' está presente y no es nulo
-               if(isset($fila_proveedor['nombre']) && $fila_proveedor['nombre'] !== null) {
-                // Si el campo 'nombre' no es nulo, asignarlo al diccionario
-                 $diccionario['pagueseSacarCirculacion'] = $fila_proveedor['nombre'];
-              } else {
-                // Si el campo 'nombre' es nulo, asignar un valor predeterminado
-                $diccionario['pagueseSacarCirculacion'] = "Nombre no disponible";
+                  //verificar que la preparacion de consulta tuvo exito
+                  if($stmt_2 = mysqli_prepare($est, $proveedores)){
+        
+        
+                    $beneficiario = $fila_resultado['beneficiario'];
+        
+                    mysqli_stmt_bind_param($stmt_2, 's', $beneficiario);
+                    mysqli_stmt_execute($stmt_2);
+          
+          
+                    //guardo los resultado de la consulta 
+                   $resultado_proveedor =mysqli_stmt_get_result($stmt_2);
+                    //paso los resultados a un array asociativo
+                    $fila_proveedor= mysqli_fetch_assoc($resultado_proveedor);
+        
+        
+                    /*******************ESTA PARTE ES PARA MANDAR LOS DATOS AL JS *********************************/
+        
+        
+        
+                    // Construir el diccionario
+                    $diccionario = array(
+                      'fechaDeSacarCirculacion' => $fila_resultado['fecha'],
+                      'sumaDeSacarCirculacion' => $fila_resultado['monto'],
+                      'descripcionSacarCirculacion' => $fila_resultado['descripcion'],
+                      //'beneficiarioDeAnulacion' => $fila_resultado['beneficiario']
+                  );
+        
+        
+                  //beneficiario lo guardo aparte porque por alguna razon dice que esta null, voy hacer una condicion 
+                  //para ese error
+        
+                  if($fila_proveedor) {
+                   // Verificar si el campo 'nombre' está presente y no es nulo
+                   if(isset($fila_proveedor['nombre']) && $fila_proveedor['nombre'] !== null) {
+                    // Si el campo 'nombre' no es nulo, asignarlo al diccionario
+                     $diccionario['pagueseSacarCirculacion'] = $fila_proveedor['nombre'];
+                  } else {
+                    // Si el campo 'nombre' es nulo, asignar un valor predeterminado
+                    $diccionario['pagueseSacarCirculacion'] = "Nombre no disponible";
+                    }
+                  }else {
+                  // Si la consulta no devolvió ninguna fila, asignar un valor predeterminado
+                  $diccionario['pagueseSacarCirculacion'] = "No se encontró beneficiario";
+              }   
+                  // Enviar respuesta al script
+                  echo json_encode($diccionario);
+                   }
+               
+                }else{
+                  echo json_encode('El cheque no se puede sacar de circulacion, ya esta anulado');
                 }
-              }else {
-              // Si la consulta no devolvió ninguna fila, asignar un valor predeterminado
-              $diccionario['pagueseSacarCirculacion'] = "No se encontró beneficiario";
-          }   
-              // Enviar respuesta al script
-              echo json_encode($diccionario);
-               }
-           
-            }else{
-              echo json_encode('El cheque esta fuera de circulacion');
-            }
-            
+              }else{
+                echo json_encode('El cheque esta fuera de circulacion');
+              }
     
           }
     

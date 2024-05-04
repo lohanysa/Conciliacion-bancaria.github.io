@@ -263,7 +263,7 @@
 
 <!----------------QUINTA #5 SECCION CONCILIACION--------------------------------------------------------------------------------------------------->
 
-    <section id="seccionConciliacion" style="display: none;">
+<section id="seccionConciliacion" style="display: none;">
         <div class="container-fluid ">
             <form id="conciliacion" name="conciliacion">
             <div class="card">
@@ -271,7 +271,7 @@
                     <div class="card-body">
                         <div class="row">
 
-<!---------------------------PRIMERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------PRIMERA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-6">
                                 <div class="card-body">
@@ -317,7 +317,7 @@
                                   <p style="text-indent: 2%;">Menos: Cheques en circulación</p>
                                   <p style="text-indent: 2%;">Más: Ajustes</p>
 
-                                  <br><br><br>
+                                  <br><br>
 
                                   <b>SALDO SEGÚN LIBRO AL</b>
                                   
@@ -333,7 +333,7 @@
                                 </div>
                             </div>
                             
-<!---------------------------SEGUNDA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------SEGUNDA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-3">
                                 <div class="card-body">
@@ -342,7 +342,7 @@
                                     <select id="agno" name="agno" style="width: 150px;">
                                     <?php agnos() ?>
                                     </select>
-                                    <br><br>
+                                    <br><br><br>
                                     
                                     <div class="input-container">
                                         <input type="text" readonly style="background: whitesmoke" placeholder="mas_Deposito" id="masdepositos" name="masdepositos">
@@ -373,7 +373,7 @@
                                 </div>
                             </div>
                             
-<!---------------------------TERCERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------TERCERA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-3">
                                 <div class="card-body">
@@ -391,15 +391,14 @@
                                     <input type="text" readonly style="background: whitesmoke" placeholder="sopongo que es la suma" id="subtotal1" name="subtotal1">
                                   </div>
                                   
-                                  <br><br><br><br><br><br>
+                                  <br><br><br><br><br>
 
                                   <div class="input-container">
                                     <input type="text" readonly style="background: whitesmoke" placeholder="sub2" id="sub2" name="sub2">
                                     <input type="text" readonly style="background: whitesmoke" placeholder=" saldolibros" id="saldolibros" name="saldolibros">
                                   </div>
                                   
-                                  
-                                  
+                                  <br><br><br>
                                   <input type="text" onkeypress="return numerosPunto(event)" maxlength="10" placeholder="saldobanco" id="saldobanco" name="saldobanco" require>
                                   
                                   <br><br><br><br><br><br>

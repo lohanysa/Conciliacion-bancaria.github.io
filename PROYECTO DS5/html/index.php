@@ -34,7 +34,7 @@
 <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
             <!--method="post" action="../php/cheque_grabar.php"-->
-            <form id="crearCheque" name="crearCheque" method="post" action="../php/cheque_grabar.php" >
+            <form id="crearCheque" name="crearCheque" method="post">
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
@@ -538,5 +538,29 @@ function mostrarMontoEnLetras() {
 }
 
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('crearCheque').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita el envío del formulario estándar
+    var formData = new FormData(this);
+
+    fetch('../php/cheque_grabar.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data); // Muestra el mensaje de éxito o error
+      // Aquí puedes realizar otras acciones, como limpiar el formulario
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Hubo un error al procesar la solicitud.');
+    });
+  });
+});
+</script>
+
 </body>
 </html>

@@ -285,7 +285,7 @@
                                   
                                   <br>
                                   
-                                  <b id='tiempo' name='tiempo'>SALDO SEGÚN LIBRO AL</b>
+                                  <b><output id='saldo_conciliado' name='saldo_conciliado'>SALDO SEGÚN LIBRO AL</output></b>
                                   
                                   <br><br>
                                   

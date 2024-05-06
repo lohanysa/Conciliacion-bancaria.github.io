@@ -151,8 +151,10 @@ formulario.addEventListener('submit', function(e){
 var boton_realizar = document.getElementById('realizar_conciliacion')
 var mes= document.getElementById('mesConciliacion');
 var agno = document.getElementById('agno')
+
+
 //para colocar la fecha
-var saldoEnBancoElement = document.getElementById('saldo_en_banco_al')
+var saldo_conciliado = document.getElementById('saldo_conciliado')
 
 
 
@@ -173,15 +175,19 @@ boton_realizar.addEventListener('click', function(e){
     //aqui va los datos
     
     .then(datos_conciliacion =>{
-        if(Object.keys(datos_conciliacion) && typeof datos_conciliacion !== 'string'){
-            /*primera columna  */
+        if(Object.keys(datos_conciliacion)){
+            alert(datos_conciliacion)
 
+            /*PRIMERA COLUMNA  */
+            
             //fecha en el saldo banco al 
-            var contenidoActual_1 = saldoEnBancoElement.innerHTML;
-            contenidoActual_1 += ' '+ datos_conciliacion.dia +' DE '+ datos_conciliacion.mes +' DEL '+ datos_conciliacion.agno;
-            saldoEnBancoElement.innerHTML = contenidoActual_1;
-            /* inputs de la segunda columna*/
-            document.getElementById('masdepositos').value = datos_conciliacion.masdepositos 
+            
+            saldo_conciliado.textContent ='SALDO SEGÚN LIBRO AL '+ datos_conciliacion.fecha.dia_anterior +' DE '+ datos_conciliacion.fecha.nombre_mes.toUpperCase() +' DEL '+ datos_conciliacion.fecha.agno_anterior;
+           
+
+            //INPUT SEGUNGA COLUMNA
+
+            document.getElementById('saldo_anterior').value = datos_conciliacion.suma.ultimo_saldo_conciliado 
             document.getElementById('maschequesanulados').value =datos_conciliacion.maschequesanulados
             document.getElementById('masnotascredito').value =datos_conciliacion.masnotascredito
             document.getElementById('masajusteslibro').value = datos_conciliacion.masajusteslibro
@@ -193,7 +199,7 @@ boton_realizar.addEventListener('click', function(e){
             document.getElementById('menoschequescirculacion').value = datos_conciliacion.menoschequescirculacion
             document.getElementById('masdepositostransito').value = datos_conciliacion.masdepositostransito
 
-            /*Tercera columna */
+            /*Tercera columna 
             document.getElementById('saldo_anterior').value = datos_conciliacion.saldo_anterior
             //creo que aqui va la resta de la columnas
             document.getElementById('sub1').value= datos_conciliacion.sub1
@@ -201,7 +207,7 @@ boton_realizar.addEventListener('click', function(e){
             document.getElementById('sub2').value = datos_conciliacion.sub2
             document.getElementById('saldolibros').value = datos_conciliacion.saldolibros
             document.getElementById('sub3').value = Math.abs(datos_conciliacion.sub3)
-            //document.getElementById('').value
+            //document.getElementById('').value */
         }else{
             alert(datos_conciliacion)
         }

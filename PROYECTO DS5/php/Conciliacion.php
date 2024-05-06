@@ -3,29 +3,30 @@ include "../conexion/conexion.php";
 
 /*
 CAMPOS DE CONCILIACION BD
- dia
- mes
- agno
- dia_anterior
- mes_anterior
- agno_anterior
- saldo_anterior
- masdepositos
- maschequesanulados
- masnotascredito
- masajusteslibro
- sub1
- subtotal1
- menoschequesgirados
- menosnotasdebito
- menosajusteslibro
- sub2
- saldolibros
- saldobanco
- masdepositostransito
- menoschequescirculacion
- masajustesbanco
- sub3
+dia 1	
+mes	
+agno	
+dia_anterior	
+mes_anterior	
+agno_anterior	
+saldo_anterior	
+masdepositos	
+maschequesanulados	
+masnotascredito	
+masajusteslibro	
+sub1	
+subtotal1	
+menoschequesgirados	
+menosnotasdebito	
+menosajusteslibro	
+sub2	
+saldolibros	
+saldobanco	
+masdepositostransito	
+menoschequescirculacion	
+masajustesbanco	
+sub3	
+saldo_conciliado
  */
 /*****
  //CAMPOS DE CHEQUES BD
@@ -64,12 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             case '01': // Cambiado a cadena
                 $mes_anterior = '12';
                 $agno_anterior = strval($agno_numero - 1);
+                $fechas_anteriores =mysqli_fetch_assoc($est->query('SELECT nombre_mes FROM meses WHERE mes = "'.$mes_anterior.'"'));
                 break;
             default:
                 $mes_anterior= strval($mes_numero - 1);
+                $agno_anterior =  strval($agno_numero);
                 if(($mes_numero - 1)<=9){
                     $mes_anterior ='0'. strval($mes_numero - 1);
                 }
+                $fechas_anteriores =mysqli_fetch_assoc($est->query('SELECT * FROM meses WHERE mes = "'.$mes_anterior.'"'));
         }
         //consulta para saber si existe la conciliacion
         $consulta = 'SELECT * FROM conciliacion WHERE mes=? AND agno=? ';
@@ -81,11 +85,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         if (mysqli_num_rows($resultado) == 0) {
-            echo json_encode('No hay conciliación del mes anterior');
+            echo json_encode('No hay conciliación del mes anterior ');
         } else {
             //INFORMACION DEL MES ACTUAL 
             try{
-                $consulta_CK=mysqli_execute_query($est, 'SELECT fecha, monto FROM cheques WHERE fecha ="'.$mes_actual.'"');//TRAE EL CHEQUE DEL MES ACTUAL
+                $consulta_CK=$est->query('SELECT fecha, monto FROM cheques WHERE fecha ="'.$mes_actual.'"');//TRAE EL CHEQUE DEL MES ACTUAL
                 $consulta_CK_anulados =$est->query('SELECT fecha_anulado, monto FROM cheques WHERE fecha_anulado="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE LOS ANULADOS
                 $consulta_CK_circulacion=$est->query('SELECT fecha_circulacion, monto FROM cheques WHERE fecha_circulacion="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE CIRCULACION
                 $consulta_Transacciones = $est->query('SELECT fecha, monto FROM otros WHERE fecha="'.$mes_actual.'"');//TRAE LAS TRANSACCIONES HECHAS 
@@ -94,6 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
                 /****RESULTADOS DEL QUERYN */
+                $ultimo_saldo_conciliado = $row['saldo_conciliado'];
                 $resultado_CK = mysqli_fetch_assoc($consulta_CK);
                 $resultado_CK_anulados = mysqli_fetch_assoc($consulta_CK_anulados);
                 $resultado_CK_circulacion = mysqli_fetch_assoc($consulta_CK_circulacion);
@@ -133,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //VOY A GUARDAR TODOS LOS LAS OPERACIONES EN UN DICCIONARIO DE DICCIONARIO
             $diccionario = array(
                 'sumas'=> array(
+                    'ultimo_saldo_conciliado' => $ultimo_saldo_conciliado,
                     'suma_CK_creados' => $suma_CK_creados,
                     'suma_CK_anulados' => $suma_CK_anulados,
                     'suma_CK_circulacion' => $suma_CK_circulacion,
@@ -142,14 +148,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                 'fecha' => array(
-                    'dia' => $resultado_meses['dia'],
-                    'mes' => $resultado_meses['mes'],
-                    'nombre_mes' =>  $resultado_meses['nombre_mes']
-                )
+                    'dia' => $resultado_meses['dia'],//dia actual
+                    'mes' => $resultado_meses['mes'],//mes actual
+                    'año_actual' => $agno,
+                    'nombre_mes' =>  $fechas_anteriores['nombre_mes'],//mes anterior
+                    'mes_anterior' => $mes_anterior,//numero del mes anterior
+                    'agno_anterior' =>$agno_anterior, //año anterior
+                    'dia_anterior' => $fechas_anteriores['dia'] //dia del mes anterior
+                ),
 
+                'ultima_conciliacion'=> $ultimo_saldo_conciliado
                 );
             
-
+                echo json_encode($diccionario);
 
             //echo json_encode('valores de la tabla: '. $row['mes'] . $row['agno'] .'valores que calculo: '.$mes . $agno);
            /* $diccionario = array(

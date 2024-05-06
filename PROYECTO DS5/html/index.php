@@ -658,4 +658,13 @@ function mostrarMontoEnLetras() {
     document.getElementById("sumaEnLetras").value = montoEnLetras;
 }
 
+//verificar la fecha de anulacion sea menor a cuando se creo
+var fechaAnulacion =document.getElementById('fechaAnulacion')// fecha de creacion
+fechaAnulacion.addEventListener('blur', function(e){
+    var verificar_fecha_anulacion = document.getElementById('fechaDeAnulacion')//fecha en la que estoy anulando
+    if(verificar_fecha_anulacion< fechaAnulacion){
+        alert('la fecha de anulacion no puede ser menor a la fecha de creacion');
+        //agregar desabilitar campos
+    }
+})
 </script>

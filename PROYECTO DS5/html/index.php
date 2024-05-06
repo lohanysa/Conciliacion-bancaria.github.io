@@ -34,7 +34,7 @@
 <section id="seccionCheque" style="display: none;">
         <div class="container-fluid">
             <!--method="post" action="../php/cheque_grabar.php"-->
-            <form id="crearCheque" name="crearCheque" method="post" action="../php/cheque_grabar.php" >
+            <form id="crearCheque" name="crearCheque" method="post">
                 <div class="card">
                     <h5 class="card-header">Creación</h5>
                     <div class="card-body">
@@ -147,7 +147,7 @@
 
 <!---------------------------BOTON DE LA SEGUNDA COLUMNA ANULACION DE CHEQUE---------------------------------------------------------------->
 
-                            <button type="submit">Anular</button>
+                            <button type="submit" id="Anulacionzion">Anular</button>
 
 <!------------------------------------------------------------------------------------------------------------------------------------------->                            
                             </div>
@@ -263,7 +263,7 @@
 
 <!----------------QUINTA #5 SECCION CONCILIACION--------------------------------------------------------------------------------------------------->
 
-    <section id="seccionConciliacion" style="display: none;">
+<section id="seccionConciliacion" style="display: none;">
         <div class="container-fluid ">
             <form id="conciliacion" name="conciliacion">
             <div class="card">
@@ -271,7 +271,7 @@
                     <div class="card-body">
                         <div class="row">
 
-<!---------------------------PRIMERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------PRIMERA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-6">
                                 <div class="card-body">
@@ -317,7 +317,7 @@
                                   <p style="text-indent: 2%;">Menos: Cheques en circulación</p>
                                   <p style="text-indent: 2%;">Más: Ajustes</p>
 
-                                  <br><br><br>
+                                  <br><br>
 
                                   <b>SALDO SEGÚN LIBRO AL</b>
                                   
@@ -333,7 +333,7 @@
                                 </div>
                             </div>
                             
-<!---------------------------SEGUNDA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------SEGUNDA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-3">
                                 <div class="card-body">
@@ -342,7 +342,7 @@
                                     <select id="agno" name="agno" style="width: 150px;">
                                     <?php agnos() ?>
                                     </select>
-                                    <br><br>
+                                    <br><br><br>
                                     
                                     <div class="input-container">
                                         <input type="text" readonly style="background: whitesmoke" placeholder="mas_Deposito" id="masdepositos" name="masdepositos">
@@ -373,7 +373,7 @@
                                 </div>
                             </div>
                             
-<!---------------------------TERCERA COLUMNA DE ANULACION DE CONCILIACION----------------------------------------------------------------------->
+<!---------------------------TERCERA COLUMNA DE CONCILIACION----------------------------------------------------------------------->
 
                             <div class="col-md-3">
                                 <div class="card-body">
@@ -391,15 +391,14 @@
                                     <input type="text" readonly style="background: whitesmoke" placeholder="sopongo que es la suma" id="subtotal1" name="subtotal1">
                                   </div>
                                   
-                                  <br><br><br><br><br><br>
+                                  <br><br><br><br><br>
 
                                   <div class="input-container">
                                     <input type="text" readonly style="background: whitesmoke" placeholder="sub2" id="sub2" name="sub2">
                                     <input type="text" readonly style="background: whitesmoke" placeholder=" saldolibros" id="saldolibros" name="saldolibros">
                                   </div>
                                   
-                                  
-                                  
+                                  <br><br><br>
                                   <input type="text" onkeypress="return numerosPunto(event)" maxlength="10" placeholder="saldobanco" id="saldobanco" name="saldobanco" require>
                                   
                                   <br><br><br><br><br><br>
@@ -534,137 +533,71 @@ function mostrarMontoEnLetras() {
     var monto = parseFloat(document.getElementById("sumaDeCheque").value);
     var parteEntera = Math.floor(monto);
     var parteDecimal = Math.round((monto - parteEntera) * 100);
-    var montoEnLetras = numeroALetras(parteEntera) + ' balboas con ' + (parteDecimal < 10 ? '0' : '') + parteDecimal + ' centavos';
+    var montoEnLetras = numeroALetras(parteEntera) + ' balboas con ' + (parteDecimal < 10 ? '0' : '') + parteDecimal + ' /100 centavos';
     document.getElementById("sumaEnLetras").value = montoEnLetras;
 }
 
 </script>
-</body>
-</html>
-<!-------------SECCION DE SCRIPTS---------------------------------------------------------------------------------------------------------------->
+
 <script>
-function mostrarSeccion(idSeccion) {
-    // Ocultar todas las secciones
-    document.querySelectorAll('section').forEach(seccion => {
-      seccion.style.display = 'none';
-    });
-
-    // Mostrar la sección deseada
-    document.getElementById(idSeccion).style.display = 'block';
-  }
-
-     // SOLO NUMEROS 
-     function solonumeros(evento) {
-        var code = (evento.which) ? evento.which : evento.keyCode;
-            if (code == 8) { // Retroceso
-            return true;
-            } else if (code >= 48 && code <= 57) { // Números 0-9
-            return true;
-            } else {
-            return false;
-    }
-}
-
-function numerosPunto(evento) {
-  var code = (evento.which) ? evento.which : evento.keyCode;
-  var inputValue = evento.target.value;
-  var dotCount = (inputValue.match(/\./g) || []).length;
-
-  if (code == 8) { // Retroceso
-      return true;
-  } else if (code == 46 && dotCount == 0) { // Punto
-      return true;
-  } else if (code >= 48 && code <= 57) { // Números 0-9
-      return true;
-  } else {
-      return false;
-  }
-}  
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener los elementos input
-    const sumaDeChequeInput = document.getElementById('sumaDeCheque');
-    const montoDeChequeInput = document.getElementById('montoDeCheque');
+  document.getElementById('crearCheque').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita el envío del formulario estándar
+    var formData = new FormData(this);
 
-    // Función para actualizar el valor del input montoDeCheque
-    function actualizarMontoDeCheque() {
-        // Obtener el valor del input sumaDeCheque
-        const sumaDeChequeValue = sumaDeChequeInput.value.trim();
-
-        // Verificar si el valor es un número válido
-        if (!isNaN(sumaDeChequeValue) && sumaDeChequeValue !== '') {
-            // Actualizar el valor del input montoDeCheque
-            montoDeChequeInput.value = sumaDeChequeValue;
-        } else {
-            // Si el valor no es válido, dejar el input montoDeCheque vacío
-            montoDeChequeInput.value = '';
-        }
-    }
-
-    // Agregar evento keyup al input sumaDeCheque para actualizar automáticamente montoDeCheque
-    sumaDeChequeInput.addEventListener('keyup', actualizarMontoDeCheque);
+    fetch('../php/cheque_grabar.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data); // Muestra el mensaje de éxito o error
+      // Aquí puedes realizar otras acciones, como limpiar el formulario
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Hubo un error al procesar la solicitud.');
+    });
+  });
 });
 
-function numeroALetras(numero) {
-    const unidades = ['', 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
-    const especiales = ['diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve'];
-    const decenas = ['', '', 'veinte', 'treinta', 'cuarenta', 'cincuenta', 'sesenta', 'setenta', 'ochenta', 'noventa'];
-    const centenas = ['', 'ciento', 'doscientos', 'trescientos', 'cuatrocientos', 'quinientos', 'seiscientos', 'setecientos', 'ochocientos', 'novecientos'];
-    const miles = ['', 'mil', 'millón'];
 
-    let letras = '';
 
-    if (numero >= 1000000) {
-        letras += numeroALetras(Math.floor(numero / 1000000)) + ' ' + miles[2] + ' ';
-        numero %= 1000000;
-    }
-    if (numero >= 1000) {
-        if (numero >= 1000 && numero <= 1999) {
-            letras += 'mil ';
-        } else if (numero >= 2000 && numero <= 9999) {
-            letras += numeroALetras(Math.floor(numero / 1000)) + ' ' + miles[1] + ' ';
-        } else {
-            letras += numeroALetras(Math.floor(numero / 1000)) + ' ' + miles[1] + ' ';
-        }
-        numero %= 1000;
-    }
-    if (numero >= 100) {
-        if (numero === 100) {
-            letras += 'cien ';
-        } else {
-            letras += centenas[Math.floor(numero / 100)] + ' ';
-        }
-        numero %= 100;
-    }
-    if (numero >= 10 && numero <= 19) {
-        letras += especiales[numero - 10];
-        numero = 0; 
-    } else if (numero >= 10) {
-        letras += decenas[Math.floor(numero / 10)] + ' ';
-        numero %= 10;
-    }
-    if (numero > 0) {
-        letras += unidades[numero];
-    }
 
-    return letras.trim(); 
-}
 
-function mostrarMontoEnLetras() {
-    var monto = parseFloat(document.getElementById("sumaDeCheque").value);
-    var parteEntera = Math.floor(monto);
-    var parteDecimal = Math.round((monto - parteEntera) * 100);
-    var montoEnLetras = numeroALetras(parteEntera) + ' balboas con ' + (parteDecimal < 10 ? '0' : '') + parteDecimal + ' centavos';
-    document.getElementById("sumaEnLetras").value = montoEnLetras;
-}
 
 //verificar la fecha de anulacion sea menor a cuando se creo
-var fechaAnulacion =document.getElementById('fechaAnulacion')// fecha de creacion
-fechaAnulacion.addEventListener('blur', function(e){
-    var verificar_fecha_anulacion = document.getElementById('fechaDeAnulacion')//fecha en la que estoy anulando
-    if(verificar_fecha_anulacion< fechaAnulacion){
-        alert('la fecha de anulacion no puede ser menor a la fecha de creacion');
-        //agregar desabilitar campos
+var fechaAnulacion = document.getElementById('fechaAnulacion'); // fecha de creacion
+fechaAnulacion.addEventListener('blur', function(e) {
+    // Convierte las fechas a objetos de fecha
+   var date1 = new Date(fechaAnulacion.value);
+   var date2 = new Date(document.getElementById('fechaDeAnulacion').value);
+
+
+ if(date1 < date2) {
+    alert("La fecha de anulacion nu puede ser menor que la fecha de creacion");
+    document.getElementById('Anulacionzion').disabled = true;
+    }else{
+        document.getElementById('Anulacionzion').disabled = false;
+    }
+});
+
+//VERIFICAR LA FECHA DE CIRCULACION
+var fechaCirculacionzin =document.getElementById('fechaSacarCirculacion')// fecha de creacion
+
+fechaCirculacionzin.addEventListener('blur', function(e){
+
+    var date1 = new Date(fechaCirculacionzin.value);
+    var date2 = new Date(document.getElementById('fechaDeSacarCirculacion').value);
+
+    if(date1 < date2) {
+        alert("La fecha de sacar de circulacion no puede ser menor que la fecha de creacion");
+        document.getElementById('Anulacionzion').disabled = true;
+    }else{
+        document.getElementById('Anulacionzion').disabled = false;
     }
 })
 </script>
+
+</body>
+</html>

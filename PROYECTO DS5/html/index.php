@@ -288,7 +288,8 @@
                                   <b><output id='saldo_conciliado' name='saldo_conciliado'>SALDO SEGÚN LIBRO AL</output></b>
                                   
                                   <br><br>
-                                  
+
+
                                   <p style="text-indent: 2%;">Más: Depósito</p>
                                   <p style="text-indent: 4%;">Cheques Anulados</p>
                                   <p style="text-indent: 4%;">Notas de Crédito</p>

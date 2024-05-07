@@ -177,6 +177,8 @@ boton_realizar.addEventListener('click', function(e){
     .then(datos_conciliacion =>{
         if(typeof datos_conciliacion === 'object' && !Array.isArray(datos_conciliacion)){
 
+
+
            
             /*PRIMERA COLUMNA  */
             document.getElementById('saldo_anterior').value = datos_conciliacion.ultima_conciliacion.toFixed(2)
@@ -222,10 +224,7 @@ boton_realizar.addEventListener('click', function(e){
             //la resta en el trecer subtotal
             document.getElementById('saldolibros').value = Math.abs((parseFloat(document.getElementById('sub2').value)-parseFloat(document.getElementById('subtotal1').value))).toFixed(2)
             //
-
-            
             document.getElementById('saldo_conciliado_2').textContent = 'SALDO CONCILIADO SEGUN LIBRO AL '+ datos_conciliacion.fecha.dia + ' DE '+ datos_conciliacion.fecha.mes.toUpperCase()+ ' DEL ' + datos_conciliacion.fecha.año_actual
-
             /****************** */
 
 
@@ -267,18 +266,36 @@ saldobanco.addEventListener('blur', function(e) {
 
 
 //evento para guandar la conciliacion
-var grabar_conciliacion = document.getElementById('grabar_conciliacion')
-var conciliacion_form = document.getElementById('conciliacion')
-grabar_conciliacion.addEventListener('click', function(e){
-    e.preventDefault()
-    var form_conciliacion = new FormData(conciliacion_form)
+// Evento para guardar la conciliación
+var grabar_conciliacion = document.getElementById('grabar_conciliacion');
+var conciliacion_form = document.getElementById('conciliacion');
 
-    fetch('../php/grabar_conciliacion.php',{
-        method: 'POST',
-        body: form_conciliacion
-    })
-    .then(res=> res.json())
-    .then(mensajes=>{
-        alert(mensajes)
-    })
-})
+
+
+
+
+
+
+
+grabar_conciliacion.addEventListener('click', function(e) {
+    e.preventDefault();
+    var form_conciliacion = new FormData(conciliacion_form);
+
+    fetch('../php/grabar_conciliacion.php', {
+            method: 'POST',
+            body: form_conciliacion
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert(data);
+        })
+        .catch(error => {
+            console.error('Error al procesar la solicitud:', error);
+            alert('Ha ocurrido un error al procesar la solicitud. Por favor, inténtalo de nuevo.');
+        });
+});

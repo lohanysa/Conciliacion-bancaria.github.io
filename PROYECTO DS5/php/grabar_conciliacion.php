@@ -13,11 +13,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Obtener los valores específicos
     $dia = intval($partes_conciliado[5]);
-    $mes = date('m', strtotime($partes_conciliado[7]));
+    $mes = intval(date('m', strtotime($partes_conciliado[7])));
     $agno = intval($partes_conciliado[9]);
     $dia_anterior = intval($partes_conciliado_2[5]);
-    $mes_anterior = date('m', strtotime($partes_conciliado_2[7]));
+    $mes_anterior = intval(date('m', strtotime($partes_conciliado_2[7])));
     $agno_anterior = intval($partes_conciliado_2[9]);
+    
 
 
 
@@ -54,7 +55,7 @@ try{
 
 
     // Cerrar la conexión
-    mysqli_close($conexion);
+    mysqli_close($est);
 
 }
 

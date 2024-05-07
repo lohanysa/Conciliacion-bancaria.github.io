@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $consulta_CK=$est->query('SELECT fecha, monto FROM cheques WHERE fecha ="'.$mes_actual.'"');//TRAE EL CHEQUE DEL MES ACTUAL
                 $consulta_CK_anulados =$est->query('SELECT fecha_anulado, monto FROM cheques WHERE fecha_anulado="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE LOS ANULADOS
                 $consulta_CK_circulacion=$est->query('SELECT fecha_circulacion, monto FROM cheques WHERE fecha_circulacion="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE CIRCULACION
-                $consulta_Transacciones = $est->query('SELECT fecha, monto FROM otros WHERE fecha="'.$mes_actual.'"');//TRAE LAS TRANSACCIONES HECHAS 
+                $consulta_transacciones = $est->query("SELECT transaccion, SUM(monto) AS total_monto FROM otros WHERE EXTRACT(YEAR FROM fecha) = " . $agno . " AND EXTRACT(MONTH FROM fecha) = " . $mes_actual);
                 $consulta_meses = $est->query('SELECT dia, mes, nombre_mes FROM meses WHERE mes="'.$mes_actual.'"');//TRAE LOS DIAS, Y MESES (PARA GUANDAR EL DIA Y MES QUE SE HACE LA CONCILIACION)
     
     
@@ -102,54 +102,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $resultado_CK = mysqli_fetch_assoc($consulta_CK);
                 $resultado_CK_anulados = mysqli_fetch_assoc($consulta_CK_anulados);
                 $resultado_CK_circulacion = mysqli_fetch_assoc($consulta_CK_circulacion);
-                $resultado_Transacciones =mysqli_fetch_assoc($consulta_Transacciones);
                 $resultado_meses = mysqli_fetch_assoc($consulta_meses);
+                $resultado_transacciones =mysqli_fetch_assoc($consulta_transacciones);
+
+                
             }catch(Exception $e){
                 print json_encode("Hubo un error: ".$e->getMessage()."En la linea: ".$e->getLine());
             }
-           
-            /***SUMAR **/
-            $suma_CK_creados=0;
-            $suma_CK_anulados =0;
-            $suma_CK_circulacion =0;
-            $suma_CK_transaccion =0;
             
+            /***SUMAR **/
+       // Inicializar las sumas
+            $suma_CK_creados = 0;
+            $suma_CK_anulados = 0;
+            $suma_CK_circulacion = 0;
+
             // Sumar los cheques creados del mes actual
-            while ($resultado_CK && $resultado_CK_anulados && $resultado_CK_circulacion && $resultado_Transacciones) {
-                // Verificar si hay más filas disponibles en cada resultado
-                if ($resultado_CK) {
-                    $suma_CK_creados += $resultado_CK['monto'];
-                    $resultado_CK = mysqli_fetch_assoc($consulta_CK);
-                }
-                if ($resultado_CK_anulados) {
-                    $suma_CK_anulados += $resultado_CK_anulados['monto'];
-                    $resultado_CK_anulados = mysqli_fetch_assoc($consulta_CK_anulados);
-                }
-                if ($resultado_CK_circulacion) {
-                    $suma_CK_circulacion +=  $resultado_CK_circulacion['monto'];
-                    $resultado_CK_circulacion = mysqli_fetch_assoc($consulta_CK_circulacion);
-                }
-                if ($resultado_Transacciones) {
-                    $suma_CK_transaccion += $resultado_Transacciones['monto'];
-                    $resultado_Transacciones = mysqli_fetch_assoc($consulta_Transacciones);
-                }
+            while ($resultado_CK = mysqli_fetch_assoc($consulta_CK)) {
+                $suma_CK_creados += $resultado_CK['monto'];
+            }
+
+            // Sumar los cheques anulados del mes actual
+            while ($resultado_CK_anulados = mysqli_fetch_assoc($consulta_CK_anulados)) {
+                $suma_CK_anulados += $resultado_CK_anulados['monto'];
+            }
+
+            // Sumar los cheques en circulación del mes actual
+            mysqli_data_seek($consulta_CK_circulacion, 0);
+            while ($resultado_CK_circulacion = mysqli_fetch_assoc($consulta_CK_circulacion)) {
+                $suma_CK_circulacion += $resultado_CK_circulacion['monto'];
             }
 
             //VOY A GUARDAR TODOS LOS LAS OPERACIONES EN UN DICCIONARIO DE DICCIONARIO
             $diccionario = array(
-                'sumas'=> array(
-                    'ultimo_saldo_conciliado' => $ultimo_saldo_conciliado,
+                'segunda_columna'=> array(
                     'suma_CK_creados' => $suma_CK_creados,
                     'suma_CK_anulados' => $suma_CK_anulados,
                     'suma_CK_circulacion' => $suma_CK_circulacion,
-                    'suma_CK_transaccion' =>  $suma_CK_transaccion
                 ),
-
-
 
                 'fecha' => array(
                     'dia' => $resultado_meses['dia'],//dia actual
-                    'mes' => $resultado_meses['mes'],//mes actual
+                    'mes' => $resultado_meses['nombre_mes'],//mes actual
                     'año_actual' => $agno,
                     'nombre_mes' =>  $fechas_anteriores['nombre_mes'],//mes anterior
                     'mes_anterior' => $mes_anterior,//numero del mes anterior
@@ -159,38 +152,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 'ultima_conciliacion'=> $ultimo_saldo_conciliado
                 );
+
+
+                
+                if ($consulta_transacciones->num_rows > 0) {
+                    // Inicializar las claves dentro del diccionario para las transacciones
+                    $diccionario['mas_depositos'] = 0;
+                    $diccionario['mas_notas_credito'] = 0;
+                    $diccionario['mas_ajustes_libro'] = 0;
+                    $diccionario['menos_notas_debito'] = 0;
+                    $diccionario['menos_ajustes_libro'] = 0;
+                    $diccionario['mas_depositos_transito'] = 0;
+                    $diccionario['mas_ajustes_banco'] = 0;
+                
+                    while ($resultado_transacciones = mysqli_fetch_assoc($consulta_transacciones)) {
+                        $transaccion_codigo = $resultado_transacciones["transaccion"];
+                        $monto_transaccion = $resultado_transacciones["total_monto"];
+                
+                        // Asignar el valor de la transacción al array $diccionario, incluyendo 0
+                        switch ($transaccion_codigo) {
+                            case "1":
+                                $diccionario['mas_depositos'] += $monto_transaccion;
+                                break;
+                            case "2":
+                                $diccionario['mas_notas_credito'] += $monto_transaccion;
+                                break;
+                            case "3":
+                                $diccionario['mas_ajustes_libro'] += $monto_transaccion;
+                                break;
+                            case "4":
+                                $diccionario['menos_notas_debito'] += $monto_transaccion;
+                                break;
+                            case "5":
+                                $diccionario['menos_ajustes_libro'] += $monto_transaccion;
+                                break;
+                            case "6":
+                                $diccionario['mas_depositos_transito'] += $monto_transaccion;
+                                break;
+                            case "7":
+                                $diccionario['mas_ajustes_banco'] += $monto_transaccion;
+                                break;
+                            // Puedes agregar más casos según sea necesario
+                        }
+                    }
+                }
             
+                
                 echo json_encode($diccionario);
 
-            //echo json_encode('valores de la tabla: '. $row['mes'] . $row['agno'] .'valores que calculo: '.$mes . $agno);
-           /* $diccionario = array(
-                'agno' =>$row['agno'],
-                'dia' => $row['dia'],
-                'mes' => $row['mes'],
-                'dia_anterior' => $row['dia_anterior'],
-                'mes_anterior' => $row['mes_anterior'],
-                'agno_anterior' => $row['agno_anterior'],
-                'saldo_anterior' => $row['saldo_anterior'],
-                'masdepositos' => $row['masdepositos'],
-                'maschequesanulados' => $row['maschequesanulados'],
-                'masnotascredito' => $row['masnotascredito'],
-                'masajusteslibro' => $row['masajusteslibro'],
-                'sub1' => $row['sub1'],
-                'subtotal1' => $row['subtotal1'],
-                'menoschequesgirados' => $row['menoschequesgirados'],
-                'menosnotasdebito' => $row['menosnotasdebito'],
-                'menosajusteslibro' => $row['menosajusteslibro'],
-                'sub2' => $row['sub2'],
-                'saldolibros' => $row['saldolibros'],
-                'saldobanco' => $row['saldobanco'],
-                'masdepositostransito' => $row['masdepositostransito'],
-                'menoschequescirculacion' => $row['menoschequescirculacion'],
-                'masajustesbanco' => $row['masajustesbanco'],
-                'sub3' => $row['sub3']
-            );
 
-
-            echo json_encode($diccionario);*/
         }
     }else {
         echo json_encode('Ha ocurrido un error. El año y la fecha están en blanco');

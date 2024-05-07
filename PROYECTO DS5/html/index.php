@@ -305,11 +305,11 @@
                                   
                                   <br><br>
 
-                                  <b id="saldo_conciliado" name="saldo_conciliado" >SALDO CONCILIADO SEGUN LIBRO AL</b>
+                                  <b><output id="saldo_conciliado_2" name="saldo_conciliado_2" >SALDO CONCILIADO SEGUN LIBRO AL</output></b>
                                   
                                   <br><br><br><br>
                                   
-                                  <b id="saldo_en_banco_al" name="saldo_en_banco_al">SALDO EN BANCO AL</b>
+                                  <b><output id="saldo_en_banco_al" name="saldo_en_banco_al">SALDO EN BANCO AL</output></b>
                                   
                                   <br><br>
                                   
@@ -319,7 +319,7 @@
 
                                   <br><br>
 
-                                  <b>SALDO SEGÚN LIBRO AL</b>
+                                  <b><output name='igual' id="igual">SALDO SEGÚN LIBRO AL</output></b>
                                   
                                   <br><br><br>
 

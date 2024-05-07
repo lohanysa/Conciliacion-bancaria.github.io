@@ -175,39 +175,74 @@ boton_realizar.addEventListener('click', function(e){
     //aqui va los datos
     
     .then(datos_conciliacion =>{
-        if(Object.keys(datos_conciliacion)){
-            alert(datos_conciliacion)
+        if(typeof datos_conciliacion === 'object' && !Array.isArray(datos_conciliacion)){
 
+           
             /*PRIMERA COLUMNA  */
-            
+            document.getElementById('saldo_anterior').value = datos_conciliacion.ultima_conciliacion.toFixed(2)
             //fecha en el saldo banco al 
             
             saldo_conciliado.textContent ='SALDO SEGÚN LIBRO AL '+ datos_conciliacion.fecha.dia_anterior +' DE '+ datos_conciliacion.fecha.nombre_mes.toUpperCase() +' DEL '+ datos_conciliacion.fecha.agno_anterior;
            
 
             //INPUT SEGUNGA COLUMNA
+            document.getElementById('masdepositos').value = datos_conciliacion.mas_depositos.toFixed(2)
+           
+            document.getElementById('maschequesanulados').value =datos_conciliacion.segunda_columna.suma_CK_anulados.toFixed(2)
 
-            document.getElementById('saldo_anterior').value = datos_conciliacion.suma.ultimo_saldo_conciliado 
-            document.getElementById('maschequesanulados').value =datos_conciliacion.maschequesanulados
-            document.getElementById('masnotascredito').value =datos_conciliacion.masnotascredito
-            document.getElementById('masajusteslibro').value = datos_conciliacion.masajusteslibro
-            document.getElementById('menoschequesgirados').value = datos_conciliacion.menoschequesgirados
-            document.getElementById('menoschequesgirados').value = datos_conciliacion.menoschequesgirados
-            document.getElementById('menosnotasdebito').value = datos_conciliacion.menosnotasdebito
-            document.getElementById('menosajusteslibro').value = datos_conciliacion.menosajusteslibro
-            document.getElementById('masajustesbanco').value = datos_conciliacion.masajustesbanco
-            document.getElementById('menoschequescirculacion').value = datos_conciliacion.menoschequescirculacion
-            document.getElementById('masdepositostransito').value = datos_conciliacion.masdepositostransito
+            document.getElementById('masnotascredito').value =datos_conciliacion.mas_notas_credito.toFixed(2)
 
-            /*Tercera columna 
-            document.getElementById('saldo_anterior').value = datos_conciliacion.saldo_anterior
-            //creo que aqui va la resta de la columnas
-            document.getElementById('sub1').value= datos_conciliacion.sub1
-            document.getElementById('subtotal1').value = datos_conciliacion.subtotal1
-            document.getElementById('sub2').value = datos_conciliacion.sub2
-            document.getElementById('saldolibros').value = datos_conciliacion.saldolibros
-            document.getElementById('sub3').value = Math.abs(datos_conciliacion.sub3)
-            //document.getElementById('').value */
+            document.getElementById('masajusteslibro').value = datos_conciliacion.mas_ajustes_libro.toFixed(2)
+            /*** */
+
+
+            //suma para el primer subtotal
+            document.getElementById('sub1').value =(datos_conciliacion.mas_depositos+datos_conciliacion.segunda_columna.suma_CK_anulados
+                +datos_conciliacion.mas_notas_credito+datos_conciliacion.mas_ajustes_libro).toFixed(2)
+
+                //luego la suma de el saldo anterior con el subtotal 1
+                document.getElementById('subtotal1').value =  ( parseFloat(document.getElementById('sub1').value) +   parseFloat(document.getElementById('saldo_anterior').value))
+
+            //
+
+
+
+            document.getElementById('menoschequesgirados').value = datos_conciliacion.segunda_columna.suma_CK_creados.toFixed(2)
+          
+            document.getElementById('menosnotasdebito').value = datos_conciliacion.menos_notas_debito.toFixed(2)
+
+            document.getElementById('menosajusteslibro').value = datos_conciliacion.menos_ajustes_libro.toFixed(2)
+               
+            
+            //suma para el segundo subtotal
+                document.getElementById('sub2').value = (datos_conciliacion.segunda_columna.suma_CK_creados+datos_conciliacion.menos_notas_debito
+                    +datos_conciliacion.menos_ajustes_libro).toFixed(2)
+            //
+
+            //la resta en el trecer subtotal
+            document.getElementById('saldolibros').value = Math.abs((parseFloat(document.getElementById('sub2').value)-parseFloat(document.getElementById('subtotal1').value))).toFixed(2)
+            //
+
+            
+            document.getElementById('saldo_conciliado_2').textContent = 'SALDO CONCILIADO SEGUN LIBRO AL '+ datos_conciliacion.fecha.dia + ' DE '+ datos_conciliacion.fecha.mes.toUpperCase()+ ' DEL ' + datos_conciliacion.fecha.año_actual
+
+            /****************** */
+
+
+            document.getElementById('saldo_en_banco_al').textContent = 'SALDO EN BANCO AL '+ datos_conciliacion.fecha.dia + ' DE '+ datos_conciliacion.fecha.mes.toUpperCase()+ ' DEL ' + datos_conciliacion.fecha.año_actual
+
+
+
+            document.getElementById('masdepositostransito').value = datos_conciliacion.mas_depositos_transito.toFixed(2)
+            document.getElementById('menoschequescirculacion').value = datos_conciliacion.segunda_columna.suma_CK_circulacion.toFixed(2)
+            document.getElementById('masajustesbanco').value = datos_conciliacion.mas_ajustes_banco.toFixed(2)
+
+            
+                    //input sub3 
+                    document.getElementById('sub3').value = (parseFloat( document.getElementById('masdepositostransito').value)- parseFloat(document.getElementById('menoschequescirculacion').value) +parseFloat(document.getElementById('masajustesbanco').value)).toFixed(2)
+
+
+                    document.getElementById('igual').value = 'SALDO SEGÚN LIBRO AL ' + datos_conciliacion.fecha.dia + ' DE '+ datos_conciliacion.fecha.mes.toUpperCase()+ ' DEL ' + datos_conciliacion.fecha.año_actual
         }else{
             alert(datos_conciliacion)
         }

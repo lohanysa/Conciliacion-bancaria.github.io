@@ -89,9 +89,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             //INFORMACION DEL MES ACTUAL 
             try{
-                $consulta_CK=$est->query('SELECT fecha, monto FROM cheques WHERE fecha ="'.$mes_actual.'"');//TRAE EL CHEQUE DEL MES ACTUAL
-                $consulta_CK_anulados =$est->query('SELECT fecha_anulado, monto FROM cheques WHERE fecha_anulado="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE LOS ANULADOS
-                $consulta_CK_circulacion=$est->query('SELECT fecha_circulacion, monto FROM cheques WHERE fecha_circulacion="'.$mes_actual.'"');//TRAE MONTO Y FECHA DE CIRCULACION
+                $consulta_CK=$est->query('SELECT fecha, monto FROM cheques WHERE EXTRACT(YEAR FROM fecha) = ' . $agno . ' AND EXTRACT(MONTH FROM fecha) = ' . $mes_actual);//TRAE EL CHEQUE DEL MES ACTUAL
+                $consulta_CK_anulados =$est->query('SELECT fecha_anulado, monto FROM cheques WHERE EXTRACT(YEAR FROM fecha_anulado) = ' . $agno . ' AND EXTRACT(MONTH FROM fecha_anulado) = ' . $mes_actual);//TRAE MONTO Y FECHA DE LOS ANULADOS
+                $consulta_CK_circulacion=$est->query('SELECT fecha_circulacion, monto FROM cheques WHERE EXTRACT(YEAR FROM fecha_circulacion) = ' . $agno . ' AND EXTRACT(MONTH FROM fecha_circulacion) = ' . $mes_actual);//TRAE MONTO Y FECHA DE CIRCULACION
                 $consulta_transacciones = $est->query("SELECT transaccion, SUM(monto) AS total_monto FROM otros WHERE EXTRACT(YEAR FROM fecha) = " . $agno . " AND EXTRACT(MONTH FROM fecha) = " . $mes_actual);
                 $consulta_meses = $est->query('SELECT dia, mes, nombre_mes FROM meses WHERE mes="'.$mes_actual.'"');//TRAE LOS DIAS, Y MESES (PARA GUANDAR EL DIA Y MES QUE SE HACE LA CONCILIACION)
     

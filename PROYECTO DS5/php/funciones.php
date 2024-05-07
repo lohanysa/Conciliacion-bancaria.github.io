@@ -98,12 +98,16 @@ function transaccion(){
 }
 
 function agnos(){
-    global $est;
-    $consulta = $est->query('SELECT * FROM conciliacion ');
-    while( $fila = mysqli_fetch_assoc($consulta)){
-        echo '<option value="'.$fila['agno'].'">'.$fila['agno'].'</option>';
+    global $est; // Assuming $est is defined outside the function
+
+    $anioActual = date("Y");
+    $anioInicial = 2000; // Assuming a starting year
+
+    // Corrected while loop syntax
+    while ($anioInicial <= $anioActual) {
+        echo '<option value="'.$anioInicial.'">'.$anioInicial.'</option>';
+        $anioInicial++;
     }
-    
 }
 
 

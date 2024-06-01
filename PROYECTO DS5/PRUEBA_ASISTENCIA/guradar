@@ -1,0 +1,29 @@
+
+            $archivo = file(
+                "../html/uploads/asistencia.dat",
+                FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES
+            );
+
+                if ($archivo !== false) {
+
+                    foreach ($archivo as $linea) {
+                        /*explode() divide una cadena en un array, utilizando otro string como delimitador.
+                         En este caso, la cadena $linea se dividirá en elementos de un array cada vez que encuentre una
+                         tabulación ("\t"). 
+                        Los elementos resultantes se almacenarán en la variable $datos.*/
+
+                        if (!empty(trim($linea))) {
+                            $datos = explode("\t", trim($linea));
+                            MariaDB($datos);
+                            /*foreach($datos as $valores){
+                                if(strlen($valores)>2)  {
+                                    list($fecha, $hora) = explode(" ",trim($valores));
+                                    MariaDB($datos,$fecha, $hora);
+                                    break;
+                                }
+                            }*/
+                     
+                }
+                    
+            }
+        }

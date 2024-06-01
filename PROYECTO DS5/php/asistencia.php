@@ -9,6 +9,7 @@ require_once "../conexion/conexion.php";
         $directorioDestino = "../html/uploads/";
         $archivoSubido = $directorioDestino . basename($_FILES['archivo']['name']);
 
+
         // Intenta mover el archivo de la vista cliente a tu directorio uploads
         if (move_uploaded_file($_FILES['archivo']['tmp_name'], $archivoSubido)) {
 

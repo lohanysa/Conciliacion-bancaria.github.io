@@ -1,6 +1,13 @@
 <?php 
 require_once "../conexion/conexion.php";
+//este archivo se llama dos veces, hice verificaciones para identificar las funciones que se deben
+//ejecutar en cada llama;
+
+if(isset($_FILES['archivo'])){
+    //cuando se sube un archivo la ejecucion inicia aqui 
     moverarchivo();
+}
+   
     $datos_file = array();
 
     function moverArchivo(){
@@ -14,7 +21,7 @@ require_once "../conexion/conexion.php";
         if (move_uploaded_file($_FILES['archivo']['tmp_name'], $archivoSubido)) {
 
             $archivo = file(
-                "../html/uploads/asistencia.dat",
+                $archivoSubido,
                 FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES
             );
 
@@ -38,6 +45,7 @@ require_once "../conexion/conexion.php";
                         }
                             
                     }
+                    //funcion para guardar los datos;
                     MariaDB($datos_file);
                 
                 }
@@ -75,7 +83,39 @@ require_once "../conexion/conexion.php";
      Deberá revisar el host, nombre de usuario y contraseña en config.inc.php y 
     asegurarse que corresponden con la información provista por el administrador del servidor MySQL. */
     
-    
+/* material de apoyo para verificar los campos de SQL :")
+cedula
+nombre1
+nombre2
+apellido1
+apellido2
+apellido_casada
+usa_ac
+genero
+tipo_persona
+codigo_marcacion
+marca_sn
+horario
+observaciones*/
+
+
+
+if(isset($_POST["inicio"]) && isset($_POST["final"]) && isset($_POST["codigo"])){
+    //inicia el reporte de la assistencia 
+  pdf();
+}
+
+function pdf(){
+    global $est;
+     $inicio =$_POST["inicio"];
+     $final= $_POST["final"];
+     $codigo = $_POST["codigo"];
+
+    $consulta = "SELECT codigo, fecha, hora FROM datos WHERE codigo =?, and fecha =  ";
+    $stmt = mysqli_prepare($est, $consulta);
+    mysqli_stmt_bind_param($stmt, "sss", $codigo);
+     //echo json_encode("si recibio");
+}
 
 
 ?>

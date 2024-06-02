@@ -108,6 +108,23 @@ function agnos(){
         echo '<option value="'.$anioInicial.'">'.$anioInicial.'</option>';
         $anioInicial++;
     }
+
+}
+
+
+
+
+function marcaciones() {
+    global $est;
+    $consulta = mysqli_query($est, "SELECT nombre1, apellido1, codigo_marcacion FROM rrhh");
+
+    
+    while ($fila = mysqli_fetch_assoc($consulta)) {
+        $marcacion = $fila["codigo_marcacion"];
+        $nombre1 = $fila["nombre1"];
+        $apellido1 = $fila["apellido1"];
+        echo '<option value="'.$marcacion.'">'.$apellido1.', '.$nombre1.'</option>';
+    }
 }
 
 

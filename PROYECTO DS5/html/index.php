@@ -25,7 +25,7 @@
             </li>
             <li><a onclick="mostrarSeccion('seccionOtrsTransacciones')">Otras transacciones</a></li>
             <li><a onclick="mostrarSeccion('seccionConciliacion')">Conciliación</a></li>
-            <li><a onclick="mostrarSeccion()">Reportes</a></li>
+            <li><a onclick="mostrarSeccion('seccionReportes')">Reportes</a></li>
             <li><a onclick="mostrarSeccion()">Mantenimiento</a></li>
         </ul>
     </nav>
@@ -420,6 +420,36 @@
     <!--los scrips van al final -->
 <script src="../javascript/crearCheques.js"></script>
 <script src="../javascript/otras_pantallas.js"></script>
+
+<!----------------SEGUNDA #6 SECCION ANULACION DE CHEQUES--------------------------------------------------------------------------------------------------->
+<section id="seccionReportes" style="display: none;">
+        <div class="container-fluid">
+            <form id="reportes" name="reportes">
+                <div class="card">
+                    <h5 class="card-header">Asistencias</h5>
+                    <div class="card-body">
+                        <div class="row">
+				<div class="col-md-3 py-3 text-center">
+					<label for="fecha-desde-input" class="form-label">Fecha Inicio</label>
+					<input type="date" name="fecha-desde" id="fecha-desde-input" class="form-control mx-auto d-block">
+				</div>
+				<div class="col-md-3 py-3 text-center">
+					<label for="fecha-hasta-input" class="form-label">Fecha Final</label>
+					<input type="date" name="fecha-hasta" id="fecha-hasta-input" class="form-control mx-auto d-block">
+				</div>
+				<div class="col-md-4 py-3 text-center">
+					<label for="inputNombres" class="form-label">Nombres</label>
+					<select class="form-select mx-auto d-block" name="nombres" id="inputNombres">
+						<option value=""></option>
+					</select>
+				</div>
+			</div>
+<!---------------------------BOTON DE LA PRIMERA COLUMNA DE CONCILIACION---------------------------------------------------------------->
+
+        <button type="submit" id="" name="">Buscar asistencia</button>
+        
+		</form>
+    </section>
 
 <!----------------SECCION DE SCRIPTS-------------------------------------------------------------------------------------------------------------->
 <script>

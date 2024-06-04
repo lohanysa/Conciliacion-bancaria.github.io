@@ -422,35 +422,46 @@
 <script src="../javascript/otras_pantallas.js"></script>
 
 <!----------------SEGUNDA #6 SECCION ANULACION DE CHEQUES--------------------------------------------------------------------------------------------------->
-<section id="seccionReportes" style="display: none;">
-        <div class="container-fluid">
-            <form id="reportes" name="reportes">
+<section id="seccionAsistencias" style="display: none;">
+    <div class="container-fluid">
+        <form id="reportes" name="reportes">
+
                 <div class="card">
                     <h5 class="card-header">Asistencias</h5>
                     <div class="card-body">
-                        <div class="row">
-				<div class="col-md-3 py-3 text-center">
+                    <input id="archivo" name="archivo" type="file" accept=".dat">
+                    <button id="enviar" name="enviar">Procesar datos</button> 
+                    <br>
+                        
+                    <div class="row">
+    
+				    <div class="col-md-3 py-3 text-center">
 					<label for="fecha-desde-input" class="form-label">Fecha Inicio</label>
-					<input type="date" name="fecha-desde" id="fecha-desde-input" class="form-control mx-auto d-block">
-				</div>
-				<div class="col-md-3 py-3 text-center">
+					<input id="Fecha_inicial" name="Fecha_inicial" type="date">
+				    </div>
+				    
+                    <div class="col-md-3 py-3 text-center">
 					<label for="fecha-hasta-input" class="form-label">Fecha Final</label>
-					<input type="date" name="fecha-hasta" id="fecha-hasta-input" class="form-control mx-auto d-block">
-				</div>
-				<div class="col-md-4 py-3 text-center">
+					<input id="Fecha_final" name="Fecha_final" type="date">
+				    </div>
+				    
+                    <div class="col-md-4 py-3 text-center">
 					<label for="inputNombres" class="form-label">Nombres</label>
-					<select class="form-select mx-auto d-block" name="nombres" id="inputNombres">
-						<option value=""></option>
-					</select>
-				</div>
-			</div>
-<!---------------------------BOTON DE LA PRIMERA COLUMNA DE CONCILIACION---------------------------------------------------------------->
+                    <select id="nombre_asistencias" name="nombre_asistencias">
+                    <?php 
+                        marcaciones();
+                    ?>
+                    </select>
+                
+				    </div>
+	</div>
+<!---------------------------BOTON DE BUSCAR ASISTENCIAS---------------------------------------------------------------->
 
-        <button type="submit" id="" name="">Buscar asistencia</button>
+        <button id="buscar_marcacion" name="buscar_marcacion">BUSCAR</button>
+        <output id="mensaje" name="mensaje"> </output>
         
 		</form>
     </section>
-
 <!----------------SECCION DE SCRIPTS-------------------------------------------------------------------------------------------------------------->
 <script>
 function mostrarSeccion(idSeccion) {

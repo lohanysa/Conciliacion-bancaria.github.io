@@ -72,21 +72,27 @@ document.getElementById("Fecha_final").addEventListener("blur", function(e){
 })
 
 //este es el scrip del boton buscar 
-document.getElementById("buscar_marcacion").addEventListener("click", function(e){
+document.getElementById("buscar_marcacion").addEventListener("click", function(e) {
     e.preventDefault();
-    fechas = new FormData();
-    fechas.append("inicio",document.getElementById("Fecha_inicial").value );
-    fechas.append("final",document.getElementById("Fecha_final").value );
-    fechas.append("codigo",document.getElementById("nombre_asistencias").value );
+    const fechas = new FormData();
+    fechas.append("inicio", document.getElementById("Fecha_inicial").value);
+    fechas.append("final", document.getElementById("Fecha_final").value);
+    fechas.append("codigo", document.getElementById("nombre_asistencias").value);
 
-    fetch('../php/asistencia.php',{
-        method:"POST",
+    fetch('../php/pdf.php', {
+        method: "POST",
         body: fechas
     })
-    .then(res => res.json())
-    .then(res=>{
-        document.getElementById('mensaje').value = res;
+    .then(response => response.blob())
+    .then(blob => {
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+        URL.revokeObjectURL(url); // Limpieza de la URL del objeto
     })
-})
+    .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('mensaje').value = 'Error al generar el reporte.';
+    });
+});
 
 </script>

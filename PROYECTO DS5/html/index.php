@@ -27,6 +27,7 @@
             <li><a onclick="mostrarSeccion('seccionConciliacion')">Conciliación</a></li>
             <li><a onclick="mostrarSeccion('seccionReportes')">Reportes</a></li>
             <li><a onclick="mostrarSeccion()">Mantenimiento</a></li>
+            <li><a onclick="mostrarSeccion('seccionAsistencias')">Asistencia</a></li>
         </ul>
     </nav>
 <!-----------------------PRIMERA #1 SECCION CREACION DE CHEQUES-------------------------------------------------------------->
@@ -421,7 +422,7 @@
 <script src="../javascript/crearCheques.js"></script>
 <script src="../javascript/otras_pantallas.js"></script>
 
-<!----------------SEGUNDA #6 SECCION ANULACION DE CHEQUES--------------------------------------------------------------------------------------------------->
+<!----------------SEGUNDA #6 SECCION ASISTENCIA--------------------------------------------------------------------------------------------------->
 <section id="seccionAsistencias" style="display: none;">
     <div class="container-fluid">
         <form id="reportes" name="reportes">

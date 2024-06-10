@@ -14,40 +14,46 @@ function moverArchivo() {
     if (isset($_FILES['archivo'])) {
         try {
             $directorioDestino = "../html/uploads/";
-            $archivoSubido = $directorioDestino . basename($_FILES['archivo']['name']);
-
-            // Intenta mover el archivo de la vista cliente a tu directorio uploads
-            if (move_uploaded_file($_FILES['archivo']['tmp_name'], $archivoSubido)) {
-                $archivo = file($archivoSubido, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
-
-                // Iniciar transacción
-                mysqli_begin_transaction($est);
-
-                foreach ($archivo as $linea) {
-                    if (!empty(trim($linea))) {
-                        $datos = explode("\t", trim($linea));
-
-                        foreach ($datos as $clave => $valor) {
-                            switch ($clave) {
-                                case 1:
-                                    $datos_file[$clave] = explode(" ", trim($valor));
-                                    break;
-                                default:
-                                    $datos_file[$clave] = $valor;
+            $nombreArchivo = basename($_FILES['archivo']['name']);
+            $archivoSubido = $directorioDestino . $nombreArchivo;
+    
+            // Verificar si el archivo ya existe
+            if (!file_exists($archivoSubido)) {
+                // Intenta mover el archivo de la vista cliente a tu directorio uploads
+                if (move_uploaded_file($_FILES['archivo']['tmp_name'], $archivoSubido)) {
+                    $archivo = file($archivoSubido, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+    
+                    // Iniciar transacción
+                    mysqli_begin_transaction($est);
+    
+                    foreach ($archivo as $linea) {
+                        if (!empty(trim($linea))) {
+                            $datos = explode("\t", trim($linea));
+    
+                            foreach ($datos as $clave => $valor) {
+                                switch ($clave) {
+                                    case 1:
+                                        $datos_file[$clave] = explode(" ", trim($valor));
+                                        break;
+                                    default:
+                                        $datos_file[$clave] = $valor;
+                                }
                             }
+    
+                            // Función para guardar los datos
+                            MariaDB($datos_file);
                         }
-
-                        // Función para guardar los datos
-                        MariaDB($datos_file);
                     }
+    
+                    // Commit de la transacción
+                    mysqli_commit($est);
+    
+                    echo json_encode("Se han guardado los datos");
+                } else {
+                    echo json_encode("Hubo un error subiendo el archivo.");
                 }
-
-                // Commit de la transacción
-                mysqli_commit($est);
-
-                echo json_encode("Se han guardado los datos");
             } else {
-                echo json_encode("Hubo un error subiendo el archivo.");
+                echo json_encode("El archivo ya existe.");
             }
         } catch (Exception $e) {
             // Rollback de la transacción en caso de error

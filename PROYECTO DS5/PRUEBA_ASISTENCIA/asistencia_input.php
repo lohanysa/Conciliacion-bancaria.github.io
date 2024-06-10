@@ -35,6 +35,7 @@
    //scrip para enviar el archivo 
    document.getElementById('enviar').addEventListener('click', function(e){
     e.preventDefault();
+    document.getElementById('mensaje').value = 'El archivo esta cargando, por favor espere...'
     var archivoData = new FormData();
     archivoData.append('archivo', document.getElementById('archivo').files[0]);
     fetch('../php/asistencia.php', {
@@ -78,6 +79,8 @@ document.getElementById("buscar_marcacion").addEventListener("click", function(e
     fechas.append("inicio", document.getElementById("Fecha_inicial").value);
     fechas.append("final", document.getElementById("Fecha_final").value);
     fechas.append("codigo", document.getElementById("nombre_asistencias").value);
+
+    
 
     fetch('../php/pdf.php', {
         method: "POST",

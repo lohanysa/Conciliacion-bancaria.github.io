@@ -459,6 +459,7 @@
 <!---------------------------BOTON DE BUSCAR ASISTENCIAS---------------------------------------------------------------->
 
         <button id="buscar_marcacion" name="buscar_marcacion">BUSCAR</button>
+        <br>
         <output id="mensaje" name="mensaje"> </output>
         
 		</form>

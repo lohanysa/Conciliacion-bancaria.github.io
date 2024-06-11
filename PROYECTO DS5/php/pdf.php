@@ -62,9 +62,8 @@ class generarPDF extends TCPDF {
         global $nombre_completo;
         
         // Obtener las fechas desde el formulario
-        $inicio = isset($_POST["inicio"]) ? $_POST["inicio"] : '';
-        $final = isset($_POST["final"]) ? $_POST["final"] : '';
-        
+        $inicio = date('d-m-y',strtotime(isset($_POST["inicio"]) ? $_POST["inicio"] : ''));
+        $final = date('d-m-y',strtotime(isset($_POST["final"]) ? $_POST["final"] : ''));
         // Configurar la fuente y agregar el título
         $this->SetFont('helvetica', 'B', 12);
         $this->Cell(0, 15, 'Reporte de Asistencias de ' . $nombre_completo, 0, 1, 'C', 0, '', 0, false, 'M', 'M');
@@ -91,7 +90,6 @@ $pdf = new generarPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UT
 // Configurar información del documento
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('LOHANYS MENA, JESUS CLAROS');
-$pdf->SetTitle('Reporte de Asistencia');
 $pdf->SetSubject('Reportes de asistencia');
 $pdf->SetKeywords('TCPDF, PDF, asistencia, reporte, fechas');
 
@@ -103,9 +101,7 @@ $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 // Añadir una página
 $pdf->AddPage();
 
-// Agregar título
-$pdf->SetFont('helvetica', 'B', 14);
-$pdf->Cell(0, 10, 'Reporte de Asistencia', 0, true, 'C', 0, '', 0, false, 'M', 'M');
+
 
 // Agregar espacio antes de la tabla
 $pdf->Ln(10);

@@ -458,7 +458,7 @@
 	</div>
 <!---------------------------BOTON DE BUSCAR ASISTENCIAS---------------------------------------------------------------->
 
-        <button id="buscar_marcacion" name="buscar_marcacion">BUSCAR</button>
+        <button id="buscar_marcacion" name="buscar_marcacion">DESPLEGAR ASISTENCIA EN PDF</button>
         <br>
         <output id="mensaje" name="mensaje"> </output>
         

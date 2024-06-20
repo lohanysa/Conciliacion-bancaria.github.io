@@ -108,7 +108,7 @@
         <div class="container-fluid">
             <form id="anulacionDeCheque" name="anulacionDeCheque">
                 <div class="card">
-                    <h5 class="card-header">Anulación</h5>
+                    <h5 class="card-header">Anulaciónn234</h5>
                     <div class="card-body">
                         <div class="row">
 
